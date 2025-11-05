@@ -1,0 +1,179 @@
+site_name: Python AI 教程：从机器学习到大模型
+site_description: 为3-5年Python后端工程师打造的AI学习路径，从传统机器学习到生成式AI
+site_author: 教程团队
+site_url: https://yourusername.github.io/py_ai_tutorial/
+
+repo_name: yourusername/py_ai_tutorial
+repo_url: https://github.com/yourusername/py_ai_tutorial
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  language: zh
+  palette:
+    # Light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: 切换到深色模式
+    # Dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: 切换到浅色模式
+
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.annotate
+    - content.code.copy
+    - toc.follow
+
+  icon:
+    repo: fontawesome/brands/github
+
+  font:
+    text: Noto Sans SC
+    code: Roboto Mono
+
+plugins:
+  - search:
+      lang:
+        - zh
+        - en
+      separator: '[\s\-\.]+'
+      jieba_dict: user_dict.txt
+      jieba_dict_user: user_dict.txt
+  - git-revision-date-localized:
+      enable_creation_date: true
+      type: datetime
+      timezone: Asia/Shanghai
+      locale: zh
+  - mkdocs-jupyter:
+      include_source: True
+      execute: false
+      allow_errors: false
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/yourusername/py_ai_tutorial
+    - icon: fontawesome/solid/envelope
+      link: mailto:tutorial@example.com
+  analytics:
+    provider: google
+    property: G-XXXXXXXXXX
+  version:
+    provider: mike
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+extra_css:
+  - stylesheets/extra.css
+
+nav:
+  - 首页: index.md
+  - 快速开始:
+      - 环境配置: quickstart.md
+      - 先修要求: prerequisites.md
+      - 学习路线: learning-path.md
+  - 跨平台指引:
+      - macOS Intel: cross-platform/setup-macos-intel.md
+      - macOS Apple Silicon: cross-platform/setup-macos-arm64.md
+      - Linux: cross-platform/setup-linux.md
+      - Windows 原生: cross-platform/setup-windows-native.md
+      - Windows WSL2: cross-platform/setup-windows-wsl2.md
+      - 云端 GPU: cross-platform/setup-cloud-gpu.md
+      - 故障排查: cross-platform/troubleshooting.md
+  - 阶段3：机器学习与数据挖掘:
+      - 概述: stage3/index.md
+      - 模块1：科学计算库: stage3/01-scientific-computing/README.md
+      - 模块2：Pandas实战: stage3/02-pandas-practice/README.md
+      - 模块3：AI数学基础: stage3/03-ml-basics/README.md
+      - 模块4：机器学习进阶: stage3/04-ml-advanced/README.md
+      - 项目作业:
+          - P01：医疗数据分析: stage3/projects/p01-healthcare/README.md
+          - P02：服装零售分析: stage3/projects/p02-ecommerce/README.md
+          - P03：银行营销分析: stage3/projects/p03-finance/README.md
+          - P04：通讯客户响应: stage3/projects/p04-telecom/README.md
+          - P05：零售超市分析: stage3/projects/p05-retail/README.md
+          - P06：滴滴运营分析: stage3/projects/p06-internet/README.md
+          - P07：淘宝用户行为: stage3/projects/p07-ecommerce-annual/README.md
+          - P08：航空客户价值: stage3/projects/p08-airline/README.md
+          - P09：信贷风控模型: stage3/projects/p09-credit/README.md
+  - 阶段4：深度学习:
+      - 概述: stage4/index.md
+      - 模块1：深度学习基础: stage4/01-dl-basics/README.md
+      - 模块2：计算机视觉: stage4/02-cv-basics/README.md
+      - 模块3：自然语言处理: stage4/03-nlp-basics/README.md
+      - 项目作业:
+          - P01：工业视觉检测: stage4/projects/p01-industrial-vision/README.md
+          - P02：YOLOv11实时检测: stage4/projects/p02-yolov11-realtime/README.md
+          - P03：OCR票据识别: stage4/projects/p03-ocr/README.md
+          - P04：图像分割: stage4/projects/p04-image-segmentation/README.md
+          - P05：医学影像分析: stage4/projects/p05-medical-imaging/README.md
+          - P06：Transformer翻译: stage4/projects/p06-transformer-translation/README.md
+          - P07：信息提取系统: stage4/projects/p07-pretrained-info-extraction/README.md
+  - 阶段5：AIGC与大模型:
+      - 概述: stage5/index.md
+      - 模块1：AIGC/LLM概述: stage5/01-aigc-llm-intro/README.md
+      - 模块2：大模型开发: stage5/02-llm-dev/README.md
+      - 项目作业:
+          - P01：对话系统: stage5/projects/p01-dialogue-system/README.md
+  - 参考资料:
+      - 术语表: glossary.md
+      - 框架对比: framework-comparison.md
+      - 贡献指南: contributing.md

@@ -1,0 +1,203 @@
+[project]
+name = "py-ai-tutorial"
+version = "0.1.0"
+description = "AI教程：从机器学习到大模型的渐进式学习路径"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [
+    {name = "教程团队", email = "tutorial@example.com"}
+]
+keywords = ["machine-learning", "deep-learning", "ai", "tutorial", "education"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Education",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Education",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+# 基础依赖（所有阶段共享）
+dependencies = [
+    "numpy>=1.26.0,<2.0.0",
+    "pandas>=2.1.0,<3.0.0",
+    "matplotlib>=3.8.0,<4.0.0",
+    "seaborn>=0.13.0,<1.0.0",
+]
+
+[project.optional-dependencies]
+# 阶段3: 传统机器学习与数据挖掘
+stage3 = [
+    "scikit-learn>=1.3.0,<2.0.0",
+    "xgboost>=2.0.0,<3.0.0",
+    "lightgbm>=4.1.0,<5.0.0",
+]
+
+# 阶段4: 深度学习 (CPU版本)
+stage4-cpu = [
+    "torch>=2.1.0,<3.0.0",
+    "torchvision>=0.16.0,<1.0.0",
+    "tensorflow>=2.15.0,<3.0.0",
+    "opencv-python>=4.8.0,<5.0.0",
+]
+
+# 阶段4: 深度学习 (macOS Apple Silicon, MPS支持)
+stage4-mps = [
+    "torch>=2.1.0,<3.0.0",
+    "torchvision>=0.16.0,<1.0.0",
+    "tensorflow-macos>=2.15.0,<3.0.0; platform_machine=='arm64'",
+    "tensorflow-metal>=1.1.0; platform_machine=='arm64'",
+    "opencv-python>=4.8.0,<5.0.0",
+]
+
+# 阶段4: 深度学习 (GPU版本, CUDA 11.8+)
+stage4-gpu = [
+    "torch>=2.1.0,<3.0.0",
+    "torchvision>=0.16.0,<1.0.0",
+    "tensorflow[and-cuda]>=2.15.0,<3.0.0",
+    "opencv-python>=4.8.0,<5.0.0",
+]
+
+# 阶段5: AIGC与大模型
+stage5 = [
+    "transformers>=4.35.0,<5.0.0",
+    "langchain>=0.1.0,<1.0.0",
+    "chromadb>=0.4.0,<1.0.0",
+    "openai>=1.0.0,<2.0.0",
+    "peft>=0.7.0,<1.0.0",  # LoRA/QLoRA
+]
+
+# 文档生成
+docs = [
+    "mkdocs>=1.5.0,<2.0.0",
+    "mkdocs-material>=9.5.0,<10.0.0",
+    "mkdocs-jupyter>=0.24.0,<1.0.0",
+    "mkdocs-git-revision-date-localized-plugin>=1.2.0,<2.0.0",
+    "jieba>=0.42.0",  # 中文搜索分词
+]
+
+# 开发依赖
+dev = [
+    "pytest>=7.4.0,<8.0.0",
+    "pytest-cov>=4.1.0,<5.0.0",
+    "nbval>=0.10.0,<1.0.0",  # Notebook测试
+    "black>=23.0.0,<24.0.0",
+    "ruff>=0.1.0,<1.0.0",
+    "mypy>=1.7.0,<2.0.0",
+    "jupyterlab>=4.0.0,<5.0.0",
+]
+
+# 评估系统
+evaluation = [
+    "fastapi>=0.104.0,<1.0.0",
+    "uvicorn>=0.24.0,<1.0.0",
+    "pydantic>=2.5.0,<3.0.0",
+    "pyyaml>=6.0.0,<7.0.0",
+]
+
+# 完整安装（所有依赖）
+all = [
+    "py-ai-tutorial[stage3,stage4-cpu,stage5,docs,dev,evaluation]",
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/py_ai_tutorial"
+Documentation = "https://yourusername.github.io/py_ai_tutorial"
+Repository = "https://github.com/yourusername/py_ai_tutorial"
+Issues = "https://github.com/yourusername/py_ai_tutorial/issues"
+
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["scripts*"]
+
+[tool.black]
+line-length = 88
+target-version = ['py39', 'py310', 'py311']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # defaults
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  | notebooks
+  | site
+)/
+'''
+
+[tool.ruff]
+line-length = 88
+target-version = "py39"
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "B",  # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "UP",  # pyupgrade
+]
+ignore = [
+    "E501",  # line too long (handled by black)
+    "B008",  # do not perform function call in argument defaults
+    "C901",  # too complex
+]
+exclude = [
+    ".git",
+    ".venv",
+    "__pycache__",
+    "build",
+    "dist",
+    "notebooks",
+    "site",
+]
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+exclude = [
+    'notebooks/',
+    'site/',
+    'build/',
+    'dist/',
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--verbose",
+    "--cov=scripts",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+]
+
+[tool.coverage.run]
+omit = [
+    "*/tests/*",
+    "*/site/*",
+    "*/build/*",
+]
+
+[tool.jupyterlab]
+static_dir = "notebooks"

@@ -1,50 +1,187 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report:
+- Version change: 1.0.0 → 1.1.0
+- Modified principles: 原则六"版本兼容性管理"中提到的 requirements.txt 或 pyproject.toml 现在有了明确偏好
+- Added principles: 新增原则八"现代化工具链"
+- Added sections: 无
+- Removed sections: 无
+- Templates requiring updates:
+  ✅ .specify/templates/plan-template.md - 已检查,兼容现有结构
+  ✅ .specify/templates/spec-template.md - 已检查,兼容现有结构
+  ✅ .specify/templates/tasks-template.md - 已检查,兼容现有结构
+  ⚠ 建议在实际项目中优先使用 uv 和 pyproject.toml
+- Follow-up TODOs: 在新项目创建时,确保使用 uv 和 pyproject.toml
+-->
 
-## Core Principles
+# Python AI 教程项目章程
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+## 核心原则
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### 一、循序渐进式教学
+**描述**: 所有教学内容必须遵循从基础到高级的渐进式路径,确保3-5年Python后端开发经验的学员能够平滑过渡到AI领域。
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+**规则**:
+- 每个主题必须明确前置知识要求
+- 不得跳过基础概念直接进入高级主题
+- 必须提供从传统后端开发到AI开发的桥接内容
+- 代码示例必须从简单到复杂递进
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+**理由**: 目标学员虽有Python经验,但可能缺乏数学基础和AI领域知识,需要系统化的引导避免认知断层。
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### 二、实战驱动开发
+**描述**: 每个知识点必须配备可运行的实战项目,理论学习占比不超过30%,实践占比至少70%。
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+**规则**:
+- 每个章节必须包含至少一个完整的可运行项目
+- 所有代码必须在Jupyter Notebook和纯Python脚本两种形式下可执行
+- 项目必须关联真实应用场景(如推荐系统、图像识别、文本生成等)
+- 必须提供数据集获取方式和环境配置说明
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+**理由**: 后端工程师习惯于实际编码解决问题,实战驱动能提高学习效率和成果转化率。
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+### 三、代码质量标准(强制)
+**描述**: 所有教学代码必须符合工程化标准,不得使用"教学简化版"降低代码质量。
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+**规则**:
+- 必须遵循PEP 8代码规范
+- 必须包含类型注解(Type Hints)
+- 必须包含完整的文档字符串(Docstrings)
+- 必须包含异常处理和日志记录
+- 必须提供单元测试示例
+- 禁止使用全局变量和魔法数字
 
-## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
+**理由**: 培养工程师而非脚本编写者,确保学员能将所学直接应用于生产环境。
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+### 四、数学概念通俗化
+**描述**: 复杂数学概念必须通过代码可视化、类比和直观解释进行降维处理。
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**规则**:
+- 每个数学公式必须配备Python代码实现
+- 必须使用可视化图表(matplotlib/seaborn)辅助理解
+- 必须提供现实世界的类比和直观解释
+- 允许先使用后理解,但必须标注深入学习路径
+
+**理由**: 后端工程师可能数学基础薄弱,过度的数学推导会造成学习障碍。
+
+### 五、多框架对比教学
+**描述**: 主流框架(TensorFlow、PyTorch、scikit-learn等)必须进行对比教学,不得只讲授单一框架。
+
+**规则**:
+- 核心概念必须展示在不同框架中的实现差异
+- 必须说明各框架的适用场景和优劣势
+- 项目代码必须至少提供PyTorch和TensorFlow两个版本
+- 必须包含框架选型决策指南
+
+**理由**: 工程实践中需要根据场景选择合适框架,单一框架教学会限制学员的技术视野。
+
+### 六、版本兼容性管理
+**描述**: 所有代码必须明确Python版本(≥3.9)和依赖库版本,确保代码可复现性。
+
+**规则**:
+- 每个项目必须提供 pyproject.toml(首选)或 requirements.txt
+- 必须标注Python最低版本要求
+- 必须提供Docker镜像或conda环境配置
+- 版本更新必须保持向后兼容至少两个小版本
+- 依赖库版本必须使用精确版本号或兼容范围
+
+**理由**: AI框架迭代快速,版本不兼容会导致代码无法运行,影响学习体验。
+
+### 七、中文优先,双语支持
+**描述**: 所有教学内容以中文为主,关键术语必须提供中英文对照。
+
+**规则**:
+- 文档、注释、变量命名遵循中文优先原则
+- 技术术语首次出现时必须标注英文原文
+- 代码注释必须使用中文(除非技术术语无中文对应)
+- 提交信息(commit messages)必须使用中文
+- 用户面向的错误消息、日志和界面必须使用中文
+- 团队沟通、设计文档、规格文档必须使用中文
+- API文档和开发者文档必须提供中文版本
+- 代码中的标识符(变量名、函数名、类名)使用英文，但必须清晰易懂
+- 必须提供中英文术语对照表
+
+**理由**: 降低学习门槛, 统一语言降低沟通障碍, 提高团队效率 确保所有成员都能充分理解和参与。同时保持与国际技术社区的连接。
+
+### 八、现代化工具链
+**描述**: 所有Python项目必须优先使用现代化工具链,提升开发效率和项目管理质量。
+
+**规则**:
+- 必须优先使用 uv 作为包管理和虚拟环境工具(相比 pip/conda)
+- 必须使用 pyproject.toml 作为项目配置文件(遵循PEP 518/621标准)
+- pyproject.toml 必须包含项目元数据、依赖声明、构建配置
+- 必须在教程中说明 uv 的优势:速度快、依赖解析准确、兼容性好
+- 对于需要兼容传统环境的场景,可同时提供 requirements.txt 作为备选
+- 必须提供 uv 的安装和使用指南
+- 项目初始化命令示例必须使用 `uv init` 或 `uv venv`
+
+**理由**: uv 是 Rust 编写的现代化 Python 包管理工具,速度比 pip 快 10-100 倍,依赖解析更准确。pyproject.toml 是 Python 官方推荐的项目配置标准,统一管理元数据、依赖和构建配置,提升项目专业性和可维护性。
+
+## 内容质量标准
+
+### 准确性要求
+- 技术描述必须准确无误,引用来源必须可靠
+- 代码必须经过测试验证,不得包含已知bug
+- 算法原理解释必须与学术界共识一致
+- 性能数据必须可复现,必须标注测试环境
+
+### 时效性要求
+- 必须使用当前(2025年)主流稳定版本的框架和库
+- 过时的技术必须明确标注并说明替代方案
+- 每季度至少进行一次内容更新审查
+- 新兴技术(如最新AIGC模型)必须在6个月内纳入课程
+
+### 完整性要求
+- 每个主题必须包含:理论讲解、代码实现、实战项目、练习题
+- 必须提供学习路线图和知识点依赖关系
+- 必须包含常见问题FAQ和故障排查指南
+- 必须提供拓展阅读资源(论文、博客、开源项目)
+
+## 开发工作流
+
+### 内容创建流程
+1. **需求分析**: 确定学习目标和前置知识
+2. **大纲设计**: 编写详细的教学大纲和知识点分解
+3. **代码开发**: 开发示例代码和实战项目(必须遵循原则三和原则八)
+4. **内容编写**: 编写教学文档和讲解视频脚本
+5. **测试验证**: 完整测试所有代码,验证环境配置
+6. **同行评审**: 至少一名AI领域专家审核技术准确性
+7. **学员试用**: 至少3名目标学员试学并收集反馈
+8. **正式发布**: 发布到公众号并持续收集反馈
+
+### 代码审查要求
+- 所有教学代码必须经过至少一次代码审查
+- 必须验证代码符合原则三的所有质量标准
+- 必须验证项目使用 uv 和 pyproject.toml(原则八)
+- 必须验证代码在不同操作系统(Windows/macOS/Linux)上可运行
+- 必须检查是否有更简洁或更高效的实现方式
+
+### 版本控制规范
+- 使用Git进行版本控制,每个主题一个独立分支
+- 提交信息必须清晰描述修改内容
+- 重大内容更新必须创建新的发布标签
+- 必须保留历史版本供学员参考
+
+## 治理规则
+
+### 章程效力
+- 本章程是项目的最高指导文件,所有开发活动必须符合章程原则
+- 任何与章程冲突的做法必须提供书面豁免申请和充分理由
+- 章程修订必须经过团队成员2/3以上同意
+
+### 合规性审查
+- 每次内容发布前必须进行章程合规性检查
+- 每月进行一次已发布内容的合规性回顾
+- 发现不合规内容必须在一周内修正或下架
+
+### 修订流程
+- 章程修订提案必须包含:修订理由、影响分析、迁移方案
+- 修订必须经过至少两周的公示期
+- 修订后必须更新所有受影响的模板和文档
+- 修订历史必须完整保留
+
+### 版本语义
+- **主版本号(MAJOR)**: 原则删除、重定义或根本性改变
+- **次版本号(MINOR)**: 新增原则、新增章节或重大扩展
+- **修订号(PATCH)**: 文字优化、错误修正、格式调整
+
+**版本**: 1.1.0 | **批准日期**: 2025-11-05 | **最后修订**: 2025-11-05

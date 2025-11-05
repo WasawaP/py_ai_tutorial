@@ -1,0 +1,105 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+.virtualenv/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb_cache
+
+# PyCharm
+.idea/
+*.iml
+
+# VSCode
+.vscode/
+*.code-workspace
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+logs/
+*.log.*
+
+# Data cache and outputs
+data/cache/
+outputs/
+*.parquet
+*.hdf5
+*.h5
+
+# Model checkpoints (exclude large files)
+*.pth
+*.ckpt
+*.safetensors
+*.bin
+models/
+checkpoints/
+
+# MkDocs
+site/
+.cache/
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.hypothesis/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# ruff
+.ruff_cache/
+
+# Temporary files
+*.tmp
+*.bak
+*.orig
+
+# Distribution / packaging
+*.tar.gz
+*.zip
+*.whl
+
+# PyPI
+.pypirc
