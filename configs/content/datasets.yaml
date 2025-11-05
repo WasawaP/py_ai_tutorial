@@ -1,0 +1,882 @@
+# 数据集配置 (Datasets Configuration)
+# 定义所有教程项目使用的数据集及其属性
+# Version: 1.0.0
+
+datasets:
+  # ========================================
+  # 阶段3：机器学习与数据挖掘 (9个数据集)
+  # ========================================
+
+  - id: "DS-S3-P01-HOSPITAL"
+    project_id: "P01"
+    stage_id: "stage3"
+    name: "朝阳医院销售数据"
+    name_en: "Hospital Sales Data"
+
+    description: |
+      医疗行业销售数据，包含药品销售记录、库存信息、销售趋势等字段，
+      用于练习数据清洗、分组聚合、时间序列分析。
+
+    source:
+      type: "synthetic"  # 合成数据（基于真实场景）
+      url: "https://github.com/yourusername/py_ai_tutorial/releases/download/v1.0.0/hospital_sales.csv"
+      mirror_url: "https://mirror.example.com/datasets/stage3/hospital_sales.csv"
+      license: "MIT"
+
+    files:
+      - filename: "hospital_sales.csv"
+        size_mb: 52
+        rows: 500000
+        checksum_sha256: "PLACEHOLDER_CHECKSUM_TO_BE_GENERATED"
+        columns: 18
+        format: "CSV"
+
+    schema:
+      - name: "order_id"
+        type: "string"
+        description: "订单编号"
+      - name: "order_date"
+        type: "datetime"
+        description: "订单日期"
+      - name: "product_name"
+        type: "string"
+        description: "药品名称"
+      - name: "category"
+        type: "string"
+        description: "药品分类"
+      - name: "quantity"
+        type: "integer"
+        description: "销售数量"
+      - name: "unit_price"
+        type: "float"
+        description: "单价（元）"
+      - name: "total_amount"
+        type: "float"
+        description: "总金额（元）"
+      - name: "customer_type"
+        type: "string"
+        description: "客户类型（个人/机构）"
+
+    statistics:
+      total_sales_range: "12M-13M CNY"
+      date_range: "2022-01-01 to 2024-12-31"
+      categories: 15
+      products: 300
+
+    preprocessing:
+      missing_values: "0.5%"
+      duplicates: "0.2%"
+      outliers: "1%"
+
+    usage_notes: |
+      - 数据已脱敏处理，不包含真实患者信息
+      - 销售金额已按比例缩放
+      - 时间戳已标准化为北京时间
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+  - id: "DS-S3-P02-ECOMMERCE"
+    project_id: "P02"
+    stage_id: "stage3"
+    name: "服装零售销售数据"
+    name_en: "Clothing Retail Sales Data"
+
+    description: |
+      服装零售行业销售数据，包含订单、客户、商品信息，
+      用于练习RFM模型、客户细分、关联规则挖掘。
+
+    source:
+      type: "synthetic"
+      url: "https://github.com/yourusername/py_ai_tutorial/releases/download/v1.0.0/clothing_retail.csv"
+      mirror_url: "https://mirror.example.com/datasets/stage3/clothing_retail.csv"
+      license: "MIT"
+
+    files:
+      - filename: "clothing_retail.csv"
+        size_mb: 105
+        rows: 1000000
+        checksum_sha256: "PLACEHOLDER_CHECKSUM_TO_BE_GENERATED"
+        columns: 22
+        format: "CSV"
+
+    schema:
+      - name: "customer_id"
+        type: "string"
+        description: "客户ID"
+      - name: "order_date"
+        type: "datetime"
+        description: "订单日期"
+      - name: "product_id"
+        type: "string"
+        description: "商品ID"
+      - name: "product_category"
+        type: "string"
+        description: "商品类别（上衣/裤子/鞋帽等）"
+      - name: "price"
+        type: "float"
+        description: "商品价格（元）"
+      - name: "quantity"
+        type: "integer"
+        description: "购买数量"
+
+    statistics:
+      customers: 50000
+      products: 2000
+      date_range: "2023-01-01 to 2024-12-31"
+      categories: 8
+
+    preprocessing:
+      missing_values: "1%"
+      duplicates: "0.3%"
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+  - id: "DS-S3-P03-FINANCE"
+    project_id: "P03"
+    stage_id: "stage3"
+    name: "银行营销数据"
+    name_en: "Bank Marketing Data"
+
+    description: |
+      银行电话营销活动数据，包含客户属性、营销活动记录、响应结果，
+      用于练习分类模型、特征工程、不平衡数据处理。
+
+    source:
+      type: "public"  # 公开数据集（UCI ML Repository）
+      url: "https://archive.ics.uci.edu/ml/datasets/Bank+Marketing"
+      mirror_url: "https://mirror.example.com/datasets/stage3/bank_marketing.csv"
+      license: "CC BY 4.0"
+      citation: "Moro et al., 2014. A Data-Driven Approach to Predict the Success of Bank Telemarketing."
+
+    files:
+      - filename: "bank_marketing.csv"
+        size_mb: 210
+        rows: 45211
+        checksum_sha256: "PLACEHOLDER_CHECKSUM_TO_BE_GENERATED"
+        columns: 17
+        format: "CSV"
+
+    schema:
+      - name: "age"
+        type: "integer"
+        description: "客户年龄"
+      - name: "job"
+        type: "string"
+        description: "职业类型"
+      - name: "marital"
+        type: "string"
+        description: "婚姻状况"
+      - name: "education"
+        type: "string"
+        description: "教育水平"
+      - name: "balance"
+        type: "float"
+        description: "账户余额"
+      - name: "y"
+        type: "binary"
+        description: "是否响应（yes/no）"
+
+    statistics:
+      positive_rate: "11.7%"
+      imbalance_ratio: "8:1"
+      features: 16
+
+    preprocessing:
+      missing_values: "0%"
+      class_imbalance: "yes (need SMOTE)"
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+  - id: "DS-S3-P04-TELECOM"
+    project_id: "P04"
+    stage_id: "stage3"
+    name: "通讯公司客户数据"
+    name_en: "Telecom Customer Data"
+
+    description: |
+      通讯行业客户行为数据，包含通话记录、套餐信息、流失标签，
+      用于练习RFM模型、流失预测、客户细分。
+
+    source:
+      type: "synthetic"
+      url: "https://github.com/yourusername/py_ai_tutorial/releases/download/v1.0.0/telecom_customer.csv"
+      mirror_url: "https://mirror.example.com/datasets/stage3/telecom_customer.csv"
+      license: "MIT"
+
+    files:
+      - filename: "telecom_customer.csv"
+        size_mb: 155
+        rows: 750000
+        checksum_sha256: "PLACEHOLDER_CHECKSUM_TO_BE_GENERATED"
+        columns: 20
+        format: "CSV"
+
+    statistics:
+      churn_rate: "25%"
+      customers: 750000
+      date_range: "2023-01-01 to 2024-12-31"
+
+    preprocessing:
+      missing_values: "2%"
+      class_imbalance: "yes (4:1 ratio)"
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+  - id: "DS-S3-P05-RETAIL"
+    project_id: "P05"
+    stage_id: "stage3"
+    name: "零售超市数据"
+    name_en: "Retail Supermarket Data"
+
+    description: |
+      零售超市经营数据，包含商品销售、库存、促销活动记录，
+      用于练习SWOT分析、关联规则挖掘、销售预测。
+
+    source:
+      type: "synthetic"
+      url: "https://github.com/yourusername/py_ai_tutorial/releases/download/v1.0.0/retail_supermarket.csv"
+      mirror_url: "https://mirror.example.com/datasets/stage3/retail_supermarket.csv"
+      license: "MIT"
+
+    files:
+      - filename: "retail_supermarket.csv"
+        size_mb: 320
+        rows: 2000000
+        checksum_sha256: "PLACEHOLDER_CHECKSUM_TO_BE_GENERATED"
+        columns: 15
+        format: "CSV"
+
+    statistics:
+      products: 5000
+      stores: 50
+      date_range: "2022-01-01 to 2024-12-31"
+
+    preprocessing:
+      missing_values: "1.5%"
+      outliers: "2%"
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+  - id: "DS-S3-P06-INTERNET"
+    project_id: "P06"
+    stage_id: "stage3"
+    name: "滴滴运营数据"
+    name_en: "Ride-Hailing Operational Data"
+
+    description: |
+      出行平台运营数据，包含订单、司机、轨迹信息，
+      用于练习异常检测、时间序列分析、地理数据可视化。
+
+    source:
+      type: "synthetic"
+      url: "https://github.com/yourusername/py_ai_tutorial/releases/download/v1.0.0/didi_operations.csv"
+      mirror_url: "https://mirror.example.com/datasets/stage3/didi_operations.csv"
+      license: "MIT"
+
+    files:
+      - filename: "didi_operations.csv"
+        size_mb: 420
+        rows: 3000000
+        checksum_sha256: "PLACEHOLDER_CHECKSUM_TO_BE_GENERATED"
+        columns: 18
+        format: "CSV"
+
+    statistics:
+      orders: 3000000
+      drivers: 10000
+      date_range: "2024-01-01 to 2024-12-31"
+      anomaly_rate: "1-2%"
+
+    preprocessing:
+      missing_values: "0.8%"
+      outliers: "1.5%"
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+  - id: "DS-S3-P07-ECOMMERCE-ANNUAL"
+    project_id: "P07"
+    stage_id: "stage3"
+    name: "淘宝用户行为数据"
+    name_en: "Taobao User Behavior Data"
+
+    description: |
+      淘宝百万级用户行为数据，包含浏览、收藏、加购、购买行为，
+      用于练习大规模数据处理、推荐系统、用户行为建模。
+
+    source:
+      type: "public"
+      url: "https://tianchi.aliyun.com/dataset/dataDetail?dataId=649"
+      mirror_url: "https://mirror.example.com/datasets/stage3/taobao_user_behavior.csv"
+      license: "Tianchi License"
+
+    files:
+      - filename: "taobao_user_behavior.csv"
+        size_mb: 520
+        rows: 100000000
+        checksum_sha256: "PLACEHOLDER_CHECKSUM_TO_BE_GENERATED"
+        columns: 6
+        format: "CSV"
+
+    schema:
+      - name: "user_id"
+        type: "integer"
+        description: "用户ID"
+      - name: "item_id"
+        type: "integer"
+        description: "商品ID"
+      - name: "category_id"
+        type: "integer"
+        description: "商品类别ID"
+      - name: "behavior_type"
+        type: "string"
+        description: "行为类型（pv/fav/cart/buy）"
+      - name: "timestamp"
+        type: "datetime"
+        description: "行为时间戳"
+
+    statistics:
+      users: 1000000
+      items: 4000000
+      behaviors: 100000000
+      date_range: "2024-11-25 to 2024-12-03"
+
+    preprocessing:
+      missing_values: "0%"
+      duplicates: "0.1%"
+
+    usage_notes: |
+      - 数据量大（100M行），建议使用分块读取
+      - 支持Dask并行计算
+      - 提供采样数据（1M行）用于快速实验
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+  - id: "DS-S3-P08-AIRLINE"
+    project_id: "P08"
+    stage_id: "stage3"
+    name: "航空公司客户数据"
+    name_en: "Airline Customer Data"
+
+    description: |
+      航空公司客户会员数据，包含飞行记录、里程累积、会员等级，
+      用于练习K-means聚类、LRFMC模型、客户价值分析。
+
+    source:
+      type: "synthetic"
+      url: "https://github.com/yourusername/py_ai_tutorial/releases/download/v1.0.0/airline_customer.csv"
+      mirror_url: "https://mirror.example.com/datasets/stage3/airline_customer.csv"
+      license: "MIT"
+
+    files:
+      - filename: "airline_customer.csv"
+        size_mb: 205
+        rows: 800000
+        checksum_sha256: "PLACEHOLDER_CHECKSUM_TO_BE_GENERATED"
+        columns: 14
+        format: "CSV"
+
+    statistics:
+      members: 800000
+      date_range: "2020-01-01 to 2024-12-31"
+      tiers: 4
+
+    preprocessing:
+      missing_values: "1%"
+      outliers: "2%"
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+  - id: "DS-S3-P09-CREDIT"
+    project_id: "P09"
+    stage_id: "stage3"
+    name: "信贷数据"
+    name_en: "Credit Loan Data"
+
+    description: |
+      信用贷款申请数据，包含客户属性、信用记录、审批结果，
+      用于练习风控建模、不平衡数据处理、模型解释性分析。
+
+    source:
+      type: "public"
+      url: "https://www.kaggle.com/c/home-credit-default-risk/data"
+      mirror_url: "https://mirror.example.com/datasets/stage3/credit_loan.csv"
+      license: "Kaggle Competition License"
+
+    files:
+      - filename: "credit_loan.csv"
+        size_mb: 110
+        rows: 307511
+        checksum_sha256: "PLACEHOLDER_CHECKSUM_TO_BE_GENERATED"
+        columns: 122
+        format: "CSV"
+
+    statistics:
+      default_rate: "8.1%"
+      imbalance_ratio: "11:1"
+      features: 121
+
+    preprocessing:
+      missing_values: "15%"
+      class_imbalance: "yes (need SMOTE)"
+      feature_engineering: "required"
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+  # ========================================
+  # 阶段4：深度学习 (7个数据集)
+  # ========================================
+
+  - id: "DS-S4-P01-INDUSTRIAL-VISION"
+    project_id: "P01"
+    stage_id: "stage4"
+    name: "工业视觉检测图像"
+    name_en: "Industrial Vision Inspection Images"
+
+    description: |
+      工业产品缺陷检测图像数据集，包含正常与缺陷样本，
+      用于练习图像分类、迁移学习、模型部署。
+
+    source:
+      type: "public"
+      url: "https://www.kaggle.com/datasets/kaustubhdikshit/neu-surface-defect-database"
+      mirror_url: "https://mirror.example.com/datasets/stage4/industrial_vision.zip"
+      license: "CC BY-SA 4.0"
+
+    files:
+      - filename: "industrial_vision.zip"
+        size_mb: 520
+        images: 10000
+        checksum_sha256: "PLACEHOLDER_CHECKSUM_TO_BE_GENERATED"
+        format: "JPG"
+
+    schema:
+      - name: "image"
+        type: "image"
+        resolution: "224x224"
+        channels: 3
+      - name: "label"
+        type: "categorical"
+        classes: 6
+        values: ["normal", "scratches", "patches", "pitted_surface", "inclusion", "rolled-in_scale"]
+
+    statistics:
+      images: 10000
+      normal: 2000
+      defective: 8000
+      split: "train/val/test = 70/15/15"
+
+    preprocessing:
+      normalization: "ImageNet mean/std"
+      augmentation: "rotation, flip, brightness"
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+  - id: "DS-S4-P02-COCO-SUBSET"
+    project_id: "P02"
+    stage_id: "stage4"
+    name: "COCO目标检测数据集子集"
+    name_en: "COCO Object Detection Subset"
+
+    description: |
+      COCO数据集子集，包含常见物体类别的图像与标注，
+      用于练习YOLO目标检测、实时推理、模型优化。
+
+    source:
+      type: "public"
+      url: "https://cocodataset.org/#download"
+      mirror_url: "https://mirror.example.com/datasets/stage4/coco_subset.zip"
+      license: "CC BY 4.0"
+
+    files:
+      - filename: "coco_subset.zip"
+        size_mb: 1050
+        images: 5000
+        checksum_sha256: "PLACEHOLDER_CHECKSUM_TO_BE_GENERATED"
+        format: "JPG + JSON"
+
+    schema:
+      - name: "image"
+        type: "image"
+        resolution: "640x640"
+        channels: 3
+      - name: "annotations"
+        type: "json"
+        format: "COCO format (bbox, category_id)"
+
+    statistics:
+      images: 5000
+      objects: 50000
+      categories: 20
+      split: "train/val = 80/20"
+
+    preprocessing:
+      normalization: "0-1 scaling"
+      augmentation: "mosaic, mixup, hsv"
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+  - id: "DS-S4-P03-RECEIPT-OCR"
+    project_id: "P03"
+    stage_id: "stage4"
+    name: "票据OCR图像"
+    name_en: "Receipt OCR Images"
+
+    description: |
+      票据识别图像数据集，包含发票、收据、合同等文档，
+      用于练习文本检测、文本识别、版面分析。
+
+    source:
+      type: "synthetic"
+      url: "https://github.com/yourusername/py_ai_tutorial/releases/download/v1.0.0/receipt_ocr.zip"
+      mirror_url: "https://mirror.example.com/datasets/stage4/receipt_ocr.zip"
+      license: "MIT"
+
+    files:
+      - filename: "receipt_ocr.zip"
+        size_mb: 310
+        images: 3000
+        checksum_sha256: "PLACEHOLDER_CHECKSUM_TO_BE_GENERATED"
+        format: "JPG + JSON"
+
+    statistics:
+      images: 3000
+      text_lines: 50000
+      languages: ["zh", "en"]
+      split: "train/val/test = 70/15/15"
+
+    preprocessing:
+      normalization: "grayscale conversion"
+      augmentation: "perspective, noise, blur"
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+  - id: "DS-S4-P04-AUTONOMOUS-DRIVING"
+    project_id: "P04"
+    stage_id: "stage4"
+    name: "自动驾驶场景数据"
+    name_en: "Autonomous Driving Scene Data"
+
+    description: |
+      自动驾驶场景语义分割数据集，包含道路、车辆、行人等类别，
+      用于练习语义分割、像素级分类、场景理解。
+
+    source:
+      type: "public"
+      url: "https://www.cityscapes-dataset.com/"
+      mirror_url: "https://mirror.example.com/datasets/stage4/autonomous_driving.zip"
+      license: "Cityscapes License"
+
+    files:
+      - filename: "autonomous_driving.zip"
+        size_mb: 1550
+        images: 2000
+        checksum_sha256: "PLACEHOLDER_CHECKSUM_TO_BE_GENERATED"
+        format: "PNG + PNG (label)"
+
+    schema:
+      - name: "image"
+        type: "image"
+        resolution: "1024x512"
+        channels: 3
+      - name: "label"
+        type: "image"
+        resolution: "1024x512"
+        classes: 19
+
+    statistics:
+      images: 2000
+      pixels: "1024x512 per image"
+      categories: 19
+      split: "train/val/test = 70/15/15"
+
+    preprocessing:
+      normalization: "ImageNet mean/std"
+      augmentation: "crop, flip, scale"
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+  - id: "DS-S4-P05-MEDICAL-IMAGING"
+    project_id: "P05"
+    stage_id: "stage4"
+    name: "医学影像数据"
+    name_en: "Medical Imaging Data"
+
+    description: |
+      医学影像数据集，包含CT、MRI扫描图像与病灶标注，
+      用于练习3D图像处理、病灶检测、可解释性分析。
+
+    source:
+      type: "public"
+      url: "https://www.cancerimagingarchive.net/"
+      mirror_url: "https://mirror.example.com/datasets/stage4/medical_imaging.zip"
+      license: "CC BY 3.0"
+
+    files:
+      - filename: "medical_imaging.zip"
+        size_mb: 850
+        images: 1000
+        checksum_sha256: "PLACEHOLDER_CHECKSUM_TO_BE_GENERATED"
+        format: "NIFTI (.nii.gz)"
+
+    schema:
+      - name: "image"
+        type: "3d_volume"
+        resolution: "512x512xN"
+        modality: "CT/MRI"
+      - name: "label"
+        type: "binary"
+        values: ["normal", "lesion"]
+
+    statistics:
+      cases: 1000
+      normal: 600
+      lesion: 400
+      split: "train/val/test = 70/15/15"
+
+    preprocessing:
+      normalization: "HU windowing"
+      augmentation: "rotation, flip, elastic"
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+  - id: "DS-S4-P06-TRANSLATION"
+    project_id: "P06"
+    stage_id: "stage4"
+    name: "翻译语料库"
+    name_en: "Translation Corpus"
+
+    description: |
+      中英翻译平行语料库，包含新闻、对话、技术文档等领域，
+      用于练习Transformer翻译、Seq2Seq建模、BLEU评估。
+
+    source:
+      type: "public"
+      url: "https://www.statmt.org/wmt14/translation-task.html"
+      mirror_url: "https://mirror.example.com/datasets/stage4/translation_corpus.zip"
+      license: "WMT License"
+
+    files:
+      - filename: "translation_corpus.zip"
+        size_mb: 425
+        sentence_pairs: 500000
+        checksum_sha256: "PLACEHOLDER_CHECKSUM_TO_BE_GENERATED"
+        format: "TXT (parallel)"
+
+    schema:
+      - name: "source"
+        type: "text"
+        language: "zh"
+        max_length: 128
+      - name: "target"
+        type: "text"
+        language: "en"
+        max_length: 128
+
+    statistics:
+      sentence_pairs: 500000
+      vocab_zh: 50000
+      vocab_en: 30000
+      split: "train/val/test = 95/2.5/2.5"
+
+    preprocessing:
+      tokenization: "BPE/WordPiece"
+      normalization: "lowercase, punctuation"
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+  - id: "DS-S4-P07-INFO-EXTRACTION"
+    project_id: "P07"
+    stage_id: "stage4"
+    name: "信息提取数据集"
+    name_en: "Information Extraction Dataset"
+
+    description: |
+      命名实体识别与关系抽取数据集，包含新闻、论文、社交媒体文本，
+      用于练习NER、关系抽取、预训练模型Fine-tuning。
+
+    source:
+      type: "public"
+      url: "https://github.com/zjunlp/DeepKE/tree/main/example/ner/standard"
+      mirror_url: "https://mirror.example.com/datasets/stage4/info_extraction.zip"
+      license: "Apache 2.0"
+
+    files:
+      - filename: "info_extraction.zip"
+        size_mb: 525
+        documents: 50000
+        checksum_sha256: "PLACEHOLDER_CHECKSUM_TO_BE_GENERATED"
+        format: "JSON"
+
+    schema:
+      - name: "text"
+        type: "text"
+        max_length: 512
+      - name: "entities"
+        type: "list"
+        format: "[{start, end, type, text}]"
+      - name: "relations"
+        type: "list"
+        format: "[{head, tail, relation}]"
+
+    statistics:
+      documents: 50000
+      entities: 200000
+      relations: 50000
+      entity_types: 12
+      split: "train/val/test = 80/10/10"
+
+    preprocessing:
+      tokenization: "BERT tokenizer"
+      max_length: 512
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+  # ========================================
+  # 阶段5：AIGC与大模型 (2个数据集)
+  # ========================================
+
+  - id: "DS-S5-P01-DIALOGUE-KB"
+    project_id: "P01"
+    stage_id: "stage5"
+    name: "对话系统知识库"
+    name_en: "Dialogue System Knowledge Base"
+
+    description: |
+      对话系统知识库数据，包含FAQ、对话历史、知识图谱，
+      用于练习对话生成、意图识别、上下文管理。
+
+    source:
+      type: "synthetic"
+      url: "https://github.com/yourusername/py_ai_tutorial/releases/download/v1.0.0/dialogue_kb.zip"
+      mirror_url: "https://mirror.example.com/datasets/stage5/dialogue_kb.zip"
+      license: "MIT"
+
+    files:
+      - filename: "dialogue_kb.zip"
+        size_mb: 520
+        documents: 10000
+        checksum_sha256: "PLACEHOLDER_CHECKSUM_TO_BE_GENERATED"
+        format: "JSON + TXT"
+
+    schema:
+      - name: "question"
+        type: "text"
+        max_length: 256
+      - name: "answer"
+        type: "text"
+        max_length: 512
+      - name: "category"
+        type: "string"
+        values: ["product", "order", "refund", "technical", "general"]
+      - name: "keywords"
+        type: "list"
+
+    statistics:
+      qa_pairs: 10000
+      categories: 5
+      avg_question_length: 50
+      avg_answer_length: 150
+
+    preprocessing:
+      tokenization: "LLM tokenizer"
+      embedding: "text-embedding-ada-002"
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+  - id: "DS-S5-P01-RAG-CORPUS"
+    project_id: "P01"
+    stage_id: "stage5"
+    name: "RAG文档库"
+    name_en: "RAG Document Corpus"
+
+    description: |
+      RAG检索增强生成文档库，包含技术文档、产品手册、FAQ，
+      用于练习向量检索、语义搜索、RAG系统构建。
+
+    source:
+      type: "synthetic"
+      url: "https://github.com/yourusername/py_ai_tutorial/releases/download/v1.0.0/rag_corpus.zip"
+      mirror_url: "https://mirror.example.com/datasets/stage5/rag_corpus.zip"
+      license: "MIT"
+
+    files:
+      - filename: "rag_corpus.zip"
+        size_mb: 535
+        documents: 5000
+        checksum_sha256: "PLACEHOLDER_CHECKSUM_TO_BE_GENERATED"
+        format: "TXT + MD"
+
+    schema:
+      - name: "document"
+        type: "text"
+        format: "markdown"
+        max_length: 2048
+      - name: "metadata"
+        type: "json"
+        fields: ["title", "category", "date", "tags"]
+
+    statistics:
+      documents: 5000
+      total_tokens: 10000000
+      avg_doc_length: 2000
+      categories: 10
+
+    preprocessing:
+      chunking: "recursive character split (512 tokens)"
+      embedding: "text-embedding-ada-002 / bge-large-zh"
+      indexing: "FAISS / ChromaDB"
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+# ========== 数据集统计 ==========
+# 总数据集数: 18个
+# Stage 3: 9个数据集, 总大小 ~2.0GB
+# Stage 4: 7个数据集, 总大小 ~5.2GB
+# Stage 5: 2个数据集, 总大小 ~1.0GB
+# 总大小: ~8.2GB
+
+# 数据来源类型:
+# - public: 7个 (公开数据集)
+# - synthetic: 11个 (合成数据)
+
+# 许可证类型:
+# - MIT: 8个
+# - CC BY 4.0: 3个
+# - Kaggle/Competition: 2个
+# - Other: 5个

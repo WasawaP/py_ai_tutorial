@@ -1,0 +1,537 @@
+# 学习模块配置 (Learning Modules Configuration)
+# 定义9个核心学习模块及其属性
+# Version: 1.0.0
+
+modules:
+  # ========================================
+  # 阶段3：机器学习与数据挖掘 (4个模块)
+  # ========================================
+
+  - id: "M01"
+    stage_id: "stage3"
+    name: "科学计算库"
+    name_en: "Scientific Computing Libraries"
+    order: 1
+
+    description: |
+      学习NumPy数组操作、Pandas数据处理、Matplotlib/Seaborn数据可视化基础，
+      掌握Python数据分析核心工具链。
+
+    topics:
+      - "NumPy数组基础（创建、索引、切片、广播）"
+      - "NumPy数学运算与统计函数"
+      - "Pandas Series与DataFrame操作"
+      - "Pandas数据读取与导出（CSV/Excel/SQL）"
+      - "Matplotlib基础绘图（折线图、散点图、柱状图）"
+      - "Seaborn统计图表（分布图、箱线图、热力图）"
+
+    learning_materials:
+      - type: "markdown"
+        path: "docs/stage3/01-scientific-computing/README.md"
+        title: "模块概述与理论"
+      - type: "notebook"
+        path: "notebooks/stage3/01-numpy-basics.ipynb"
+        title: "NumPy快速入门"
+      - type: "notebook"
+        path: "notebooks/stage3/02-pandas-intro.ipynb"
+        title: "Pandas数据处理"
+      - type: "notebook"
+        path: "notebooks/stage3/03-visualization.ipynb"
+        title: "数据可视化实战"
+
+    time_estimate:
+      reading_hours: 0.5
+      practice_hours: 1.0
+      total_hours: 1.5
+
+    prerequisites:
+      - "Python基础语法（函数、列表、字典、推导式）"
+      - "Jupyter Notebook基本使用"
+
+    key_skills:
+      - "NumPy数组操作与向量化计算"
+      - "Pandas数据清洗与转换"
+      - "数据可视化图表选择与绘制"
+
+    success_criteria:
+      - "能独立完成NumPy数组操作练习（20+题）"
+      - "能使用Pandas处理实际数据集（≥1000行）"
+      - "能绘制至少5种类型的数据图表"
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+  - id: "M02"
+    stage_id: "stage3"
+    name: "Pandas项目实战"
+    name_en: "Pandas Project Practice"
+    order: 2
+
+    description: |
+      通过真实业务场景学习Pandas高级特性，掌握分组聚合、数据透视表、
+      时间序列分析、数据合并等企业级数据处理技能。
+
+    topics:
+      - "Pandas高级索引（loc/iloc/at/iat）"
+      - "分组聚合（groupby/agg/transform）"
+      - "数据透视表（pivot_table/crosstab）"
+      - "时间序列分析（日期解析、重采样、滚动窗口）"
+      - "数据合并（merge/join/concat）"
+      - "数据清洗（缺失值、异常值、重复值处理）"
+
+    learning_materials:
+      - type: "markdown"
+        path: "docs/stage3/02-pandas-practice/README.md"
+        title: "模块概述与理论"
+      - type: "notebook"
+        path: "notebooks/stage3/04-pandas-advanced.ipynb"
+        title: "Pandas高级操作"
+      - type: "notebook"
+        path: "notebooks/stage3/05-timeseries-analysis.ipynb"
+        title: "时间序列分析"
+      - type: "notebook"
+        path: "notebooks/stage3/06-data-cleaning.ipynb"
+        title: "数据清洗实战"
+
+    time_estimate:
+      reading_hours: 0.5
+      practice_hours: 1.5
+      total_hours: 2.0
+
+    prerequisites:
+      - "完成M01科学计算库学习"
+      - "理解SQL基础查询概念"
+
+    key_skills:
+      - "Pandas分组聚合与透视表"
+      - "时间序列数据处理"
+      - "数据合并与关联"
+      - "数据质量检查与清洗"
+
+    success_criteria:
+      - "能使用groupby完成复杂统计分析"
+      - "能处理时间序列数据（日/周/月聚合）"
+      - "能完成多表关联查询（2-3张表）"
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+  - id: "M03"
+    stage_id: "stage3"
+    name: "AI数学基础"
+    name_en: "AI Mathematics Foundations"
+    order: 3
+
+    description: |
+      通过通俗化讲解与可视化，学习机器学习必备的数学知识，
+      包括线性代数、概率统计、微积分基础概念。
+
+    topics:
+      - "线性代数（向量、矩阵、特征值、SVD）"
+      - "概率论（概率分布、贝叶斯定理、最大似然）"
+      - "微积分（导数、梯度、链式法则）"
+      - "优化理论（梯度下降、学习率、正则化）"
+      - "信息论（熵、交叉熵、KL散度）"
+
+    learning_materials:
+      - type: "markdown"
+        path: "docs/stage3/03-ml-basics/README.md"
+        title: "AI数学通俗讲解"
+      - type: "notebook"
+        path: "notebooks/stage3/07-linear-algebra-visual.ipynb"
+        title: "线性代数可视化"
+      - type: "notebook"
+        path: "notebooks/stage3/08-probability-intro.ipynb"
+        title: "概率统计基础"
+      - type: "notebook"
+        path: "notebooks/stage3/09-calculus-intuition.ipynb"
+        title: "微积分直觉理解"
+
+    time_estimate:
+      reading_hours: 1.0
+      practice_hours: 1.0
+      total_hours: 2.0
+
+    prerequisites:
+      - "高中数学基础"
+      - "理解函数与图像概念"
+
+    key_skills:
+      - "理解向量与矩阵运算的几何意义"
+      - "理解概率分布与期望、方差"
+      - "理解梯度下降优化过程"
+      - "理解损失函数与评估指标"
+
+    success_criteria:
+      - "能解释机器学习公式的物理意义"
+      - "能手动计算简单梯度下降过程"
+      - "能理解至少3种常用损失函数"
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+  - id: "M04"
+    stage_id: "stage3"
+    name: "机器学习进阶"
+    name_en: "Advanced Machine Learning"
+    order: 4
+
+    description: |
+      深入学习scikit-learn机器学习算法，掌握分类、回归、聚类、集成学习，
+      理解模型评估、特征工程、超参数调优全流程。
+
+    topics:
+      - "监督学习（逻辑回归、决策树、SVM、KNN）"
+      - "集成学习（随机森林、GBDT、XGBoost、LightGBM）"
+      - "无监督学习（K-means、层次聚类、DBSCAN）"
+      - "模型评估（交叉验证、混淆矩阵、ROC-AUC、F1-Score）"
+      - "特征工程（特征选择、特征缩放、编码、降维）"
+      - "超参数调优（GridSearch、RandomSearch、Optuna）"
+
+    learning_materials:
+      - type: "markdown"
+        path: "docs/stage3/04-ml-advanced/README.md"
+        title: "机器学习算法详解"
+      - type: "notebook"
+        path: "notebooks/stage3/10-classification-algorithms.ipynb"
+        title: "分类算法对比"
+      - type: "notebook"
+        path: "notebooks/stage3/11-ensemble-learning.ipynb"
+        title: "集成学习实战"
+      - type: "notebook"
+        path: "notebooks/stage3/12-clustering-analysis.ipynb"
+        title: "聚类分析应用"
+
+    time_estimate:
+      reading_hours: 1.0
+      practice_hours: 2.0
+      total_hours: 3.0
+
+    prerequisites:
+      - "完成M01-M03模块学习"
+      - "理解AI数学基础概念"
+
+    key_skills:
+      - "scikit-learn建模完整流程"
+      - "分类与回归算法选择与调优"
+      - "聚类算法应用与评估"
+      - "特征工程与数据预处理"
+      - "模型评估与性能优化"
+
+    success_criteria:
+      - "能独立完成端到端机器学习项目"
+      - "能选择合适算法并调优超参数"
+      - "能解释模型预测结果与误差来源"
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+  # ========================================
+  # 阶段4：深度学习 (3个模块)
+  # ========================================
+
+  - id: "M01"
+    stage_id: "stage4"
+    name: "深度学习基础理论"
+    name_en: "Deep Learning Fundamentals"
+    order: 1
+
+    description: |
+      学习深度学习核心概念，掌握PyTorch/TensorFlow基础API，
+      理解神经网络、反向传播、优化器、正则化技术。
+
+    topics:
+      - "神经网络基础（感知机、多层网络、激活函数）"
+      - "反向传播算法（链式法则、梯度计算）"
+      - "优化器（SGD、Adam、AdamW、学习率调度）"
+      - "正则化技术（Dropout、Batch Normalization、Weight Decay）"
+      - "PyTorch基础（Tensor、nn.Module、DataLoader、训练循环）"
+      - "TensorFlow基础（Keras API、Model Subclassing、fit/evaluate）"
+
+    learning_materials:
+      - type: "markdown"
+        path: "docs/stage4/01-dl-basics/README.md"
+        title: "深度学习理论"
+      - type: "notebook"
+        path: "notebooks/stage4/01-pytorch-basics.ipynb"
+        title: "PyTorch快速入门"
+      - type: "notebook"
+        path: "notebooks/stage4/02-tensorflow-basics.ipynb"
+        title: "TensorFlow快速入门"
+      - type: "notebook"
+        path: "notebooks/stage4/03-neural-network-training.ipynb"
+        title: "神经网络训练实战"
+
+    time_estimate:
+      reading_hours: 1.5
+      practice_hours: 2.0
+      total_hours: 3.5
+
+    prerequisites:
+      - "完成阶段3学习（Stage 3 Complete）"
+      - "理解梯度下降与损失函数"
+
+    key_skills:
+      - "PyTorch/TensorFlow基础API使用"
+      - "神经网络构建与训练"
+      - "优化器与学习率调优"
+      - "模型保存与加载"
+
+    success_criteria:
+      - "能使用PyTorch或TensorFlow构建简单神经网络"
+      - "能完成模型训练、验证、测试流程"
+      - "理解反向传播与梯度更新过程"
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+  - id: "M02"
+    stage_id: "stage4"
+    name: "计算机视觉基础"
+    name_en: "Computer Vision Basics"
+    order: 2
+
+    description: |
+      学习CNN卷积神经网络架构，掌握图像分类、目标检测、图像分割技术，
+      理解迁移学习与模型部署流程。
+
+    topics:
+      - "CNN架构（卷积层、池化层、全连接层）"
+      - "经典网络（AlexNet、VGG、ResNet、EfficientNet）"
+      - "图像分类（ImageNet预训练、Fine-tuning）"
+      - "目标检测（YOLO系列、Faster R-CNN、RetinaNet）"
+      - "图像分割（U-Net、Mask R-CNN、DeepLab）"
+      - "迁移学习（Feature Extraction、Fine-tuning策略）"
+      - "模型部署（ONNX、TensorFlow Lite、TorchScript）"
+
+    learning_materials:
+      - type: "markdown"
+        path: "docs/stage4/02-cv-basics/README.md"
+        title: "计算机视觉理论"
+      - type: "notebook"
+        path: "notebooks/stage4/04-cnn-architecture.ipynb"
+        title: "CNN架构详解"
+      - type: "notebook"
+        path: "notebooks/stage4/05-image-classification.ipynb"
+        title: "图像分类实战"
+      - type: "notebook"
+        path: "notebooks/stage4/06-object-detection.ipynb"
+        title: "目标检测应用"
+      - type: "notebook"
+        path: "notebooks/stage4/07-image-segmentation.ipynb"
+        title: "图像分割技术"
+
+    time_estimate:
+      reading_hours: 1.5
+      practice_hours: 2.5
+      total_hours: 4.0
+
+    prerequisites:
+      - "完成M01深度学习基础"
+      - "理解卷积运算原理"
+
+    key_skills:
+      - "CNN网络构建与训练"
+      - "图像分类模型迁移学习"
+      - "YOLO目标检测部署"
+      - "图像分割模型评估"
+
+    success_criteria:
+      - "能完成图像分类项目（准确率≥90%）"
+      - "能部署目标检测模型到实际场景"
+      - "理解迁移学习与Fine-tuning策略"
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+  - id: "M03"
+    stage_id: "stage4"
+    name: "自然语言处理基础"
+    name_en: "NLP Basics"
+    order: 3
+
+    description: |
+      学习NLP核心技术，掌握RNN/LSTM序列模型、Transformer架构、
+      预训练模型（BERT/GPT），完成文本分类、翻译、信息提取任务。
+
+    topics:
+      - "文本预处理（分词、编码、Tokenization）"
+      - "词向量（Word2Vec、GloVe、FastText）"
+      - "RNN序列模型（LSTM、GRU、双向RNN）"
+      - "Transformer架构（Self-Attention、Multi-Head Attention）"
+      - "预训练模型（BERT、GPT、T5原理）"
+      - "文本分类（情感分析、意图识别）"
+      - "序列标注（命名实体识别、词性标注）"
+      - "序列生成（机器翻译、文本摘要）"
+
+    learning_materials:
+      - type: "markdown"
+        path: "docs/stage4/03-nlp-basics/README.md"
+        title: "NLP理论与技术"
+      - type: "notebook"
+        path: "notebooks/stage4/08-text-preprocessing.ipynb"
+        title: "文本预处理"
+      - type: "notebook"
+        path: "notebooks/stage4/09-transformer-explained.ipynb"
+        title: "Transformer详解"
+      - type: "notebook"
+        path: "notebooks/stage4/10-pretrained-models.ipynb"
+        title: "预训练模型应用"
+
+    time_estimate:
+      reading_hours: 1.5
+      practice_hours: 2.0
+      total_hours: 3.5
+
+    prerequisites:
+      - "完成M01深度学习基础"
+      - "理解序列模型概念"
+
+    key_skills:
+      - "文本预处理与Tokenization"
+      - "Transformer模型使用"
+      - "预训练模型Fine-tuning"
+      - "文本分类与序列标注"
+
+    success_criteria:
+      - "能使用BERT完成文本分类任务（F1≥85%）"
+      - "能使用Transformer完成翻译任务（BLEU≥30）"
+      - "理解Attention机制原理"
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+  # ========================================
+  # 阶段5：AIGC与大模型 (2个模块)
+  # ========================================
+
+  - id: "M01"
+    stage_id: "stage5"
+    name: "AIGC与LLM概述"
+    name_en: "AIGC & LLM Overview"
+    order: 1
+
+    description: |
+      了解生成式AI发展历程，对比主流大语言模型（GPT/Claude/DeepSeek），
+      学习Prompt Engineering技巧，理解LLM能力边界与应用场景。
+
+    topics:
+      - "生成式AI发展历程（GPT-1到GPT-4、Claude系列）"
+      - "大语言模型原理（Transformer、预训练、微调）"
+      - "主流LLM对比（OpenAI GPT、Anthropic Claude、DeepSeek、GLM、Qwen）"
+      - "Prompt Engineering（Zero-shot、Few-shot、Chain-of-Thought）"
+      - "LLM能力评估（MMLU、HumanEval、C-Eval）"
+      - "LLM应用场景（对话、写作、代码生成、知识问答）"
+
+    learning_materials:
+      - type: "markdown"
+        path: "docs/stage5/01-aigc-llm-intro/README.md"
+        title: "AIGC与LLM概述"
+      - type: "notebook"
+        path: "notebooks/stage5/01-llm-comparison.ipynb"
+        title: "主流LLM对比实验"
+      - type: "notebook"
+        path: "notebooks/stage5/02-prompt-engineering.ipynb"
+        title: "Prompt Engineering实战"
+
+    time_estimate:
+      reading_hours: 0.5
+      practice_hours: 0.5
+      total_hours: 1.0
+
+    prerequisites:
+      - "完成阶段4学习（Stage 4 Complete）"
+      - "理解Transformer架构"
+
+    key_skills:
+      - "主流LLM API调用"
+      - "Prompt Engineering技巧"
+      - "LLM输出质量评估"
+
+    success_criteria:
+      - "能编写有效的Prompt实现特定任务"
+      - "能对比不同LLM的输出质量"
+      - "理解LLM的能力边界与局限性"
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+  - id: "M02"
+    stage_id: "stage5"
+    name: "大模型开发"
+    name_en: "LLM Development"
+    order: 2
+
+    description: |
+      深入学习LLM应用开发技术，掌握LangChain框架、RAG检索增强生成、
+      Agent工具调用、模型微调（LoRA/QLoRA）全栈技能。
+
+    topics:
+      - "LangChain框架（Chain、Prompt Template、Memory）"
+      - "向量数据库（Chroma、FAISS、Weaviate）"
+      - "RAG架构（检索、排序、生成、评估）"
+      - "Agent框架（ReAct、Tool Use、Multi-Agent）"
+      - "模型微调（LoRA、QLoRA、全量微调）"
+      - "模型部署（vLLM、llama.cpp、Ollama）"
+      - "评估指标（ROUGE、BLEU、检索准确率）"
+
+    learning_materials:
+      - type: "markdown"
+        path: "docs/stage5/02-llm-dev/README.md"
+        title: "大模型开发技术"
+      - type: "notebook"
+        path: "notebooks/stage5/03-langchain-basics.ipynb"
+        title: "LangChain基础"
+      - type: "notebook"
+        path: "notebooks/stage5/04-rag-system.ipynb"
+        title: "RAG系统构建"
+      - type: "notebook"
+        path: "notebooks/stage5/05-agent-framework.ipynb"
+        title: "Agent框架应用"
+      - type: "notebook"
+        path: "notebooks/stage5/06-model-finetuning.ipynb"
+        title: "模型微调实战"
+
+    time_estimate:
+      reading_hours: 1.0
+      practice_hours: 2.0
+      total_hours: 3.0
+
+    prerequisites:
+      - "完成M01 AIGC与LLM概述"
+      - "理解向量检索与语义相似度"
+
+    key_skills:
+      - "LangChain应用开发"
+      - "RAG系统构建与优化"
+      - "Agent工具调用实现"
+      - "模型微调（LoRA）"
+
+    success_criteria:
+      - "能构建端到端RAG知识库问答系统"
+      - "能实现Agent工具调用功能（≥3个工具）"
+      - "能完成模型微调并评估效果"
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+# ========== 模块依赖关系 ==========
+# Stage 3: M01 → M02 → M03 → M04
+# Stage 4: M01 → M02/M03 (M02和M03可并行学习)
+# Stage 5: M01 → M02
+
+# ========== 总体统计 ==========
+# 总模块数: 9个
+# Stage 3: 4个模块, 8.5小时
+# Stage 4: 3个模块, 11小时
+# Stage 5: 2个模块, 4小时
+# 总学习时间: 23.5小时

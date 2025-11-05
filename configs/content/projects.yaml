@@ -1,0 +1,1221 @@
+# 项目配置 (Projects Configuration)
+# 定义17个实战项目及其属性
+# Version: 1.0.0
+
+projects:
+  # ========================================
+  # 阶段3：机器学习与数据挖掘 (9个项目)
+  # ========================================
+
+  - id: "P01"
+    stage_id: "stage3"
+    name: "朝阳医院指标搭建及销售数据汇总"
+    name_en: "Hospital Metrics & Sales Data Analysis"
+    industry: "healthcare"
+    order: 1
+
+    description: |
+      使用Pandas分析医院销售数据，完成指标搭建、销售汇总、趋势分析。
+      重点学习数据清洗、分组聚合、数据透视表等技能。
+
+    objectives:
+      - "理解医疗行业数据分析指标体系"
+      - "掌握Pandas数据清洗与预处理"
+      - "学习销售数据汇总与可视化"
+      - "完成月度/季度销售趋势分析"
+
+    datasets:
+      - "DS-S3-P01-HOSPITAL"
+
+    techniques:
+      - "Pandas数据清洗（缺失值、异常值处理）"
+      - "分组聚合（groupby/agg）"
+      - "数据透视表（pivot_table）"
+      - "时间序列分析（月度/季度聚合）"
+      - "可视化（折线图、柱状图）"
+
+    deliverables:
+      - type: "notebook"
+        path: "notebooks/stage3/p01-healthcare.ipynb"
+        description: "Jupyter Notebook完整分析流程"
+      - type: "script"
+        path: "docs/stage3/projects/p01-healthcare/src/analyze.py"
+        description: "Python脚本生产版本"
+      - type: "report"
+        path: "docs/stage3/projects/p01-healthcare/outputs/reports/report.md"
+        description: "分析报告（包含可视化图表）"
+      - type: "config"
+        path: "docs/stage3/projects/p01-healthcare/configs/default.yaml"
+        description: "配置文件（数据路径、参数）"
+
+    expected_metrics:
+      - name: "总销售额 (Total Sales)"
+        range: "12M-13M"
+        unit: "CNY"
+      - name: "平均订单金额 (Average Order Value)"
+        range: "200-300"
+        unit: "CNY"
+      - name: "月销售增长率 (Monthly Growth Rate)"
+        range: "5%-15%"
+        unit: "%"
+
+    time_estimate:
+      hours: 2-3
+
+    difficulty: "beginner"
+
+    prerequisites:
+      - "完成M01科学计算库"
+      - "完成M02 Pandas项目实战"
+
+    success_criteria:
+      - "输出指标落在预期范围内（±5%误差）"
+      - "可视化图表清晰易懂（≥5张图）"
+      - "代码符合PEP 8规范"
+      - "完成分析报告（≥500字）"
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+  - id: "P02"
+    stage_id: "stage3"
+    name: "服装零售销售数据分析（优衣库4P分析）"
+    name_en: "Clothing Retail Sales Analysis (4P Analysis)"
+    industry: "ecommerce"
+    order: 2
+
+    description: |
+      分析服装零售企业销售数据，完成4P营销分析（Product/Price/Place/Promotion），
+      学习RFM模型、客户细分、关联规则挖掘。
+
+    objectives:
+      - "理解零售行业4P营销分析框架"
+      - "掌握RFM客户细分模型"
+      - "学习关联规则挖掘（Market Basket Analysis）"
+      - "完成销售策略优化建议"
+
+    datasets:
+      - "DS-S3-P02-ECOMMERCE"
+
+    techniques:
+      - "RFM模型（Recency/Frequency/Monetary）"
+      - "K-means聚类（客户细分）"
+      - "关联规则挖掘（Apriori算法）"
+      - "相关性分析（Pearson相关系数）"
+      - "SWOT分析框架"
+
+    deliverables:
+      - type: "notebook"
+        path: "notebooks/stage3/p02-ecommerce.ipynb"
+      - type: "script"
+        path: "docs/stage3/projects/p02-ecommerce/src/analyze.py"
+      - type: "report"
+        path: "docs/stage3/projects/p02-ecommerce/outputs/reports/report.md"
+
+    expected_metrics:
+      - name: "客户细分数量 (Customer Segments)"
+        range: "3-5"
+        unit: "clusters"
+      - name: "高价值客户占比 (High-Value Customer %)"
+        range: "15%-25%"
+        unit: "%"
+      - name: "关联规则数量 (Association Rules)"
+        range: "10-20"
+        unit: "rules"
+
+    time_estimate:
+      hours: 3-4
+
+    difficulty: "beginner"
+
+    prerequisites:
+      - "完成M03 AI数学基础"
+      - "完成M04机器学习进阶（聚类部分）"
+
+    success_criteria:
+      - "RFM模型客户细分合理（3-5组）"
+      - "关联规则挖掘有效（置信度≥60%）"
+      - "提供可落地的营销策略建议（≥3条）"
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+  - id: "P03"
+    stage_id: "stage3"
+    name: "银行电话营销活动分析（分类模型）"
+    name_en: "Bank Marketing Campaign Analysis (Classification)"
+    industry: "finance"
+    order: 3
+
+    description: |
+      构建银行电话营销响应预测模型，对比多种分类算法（逻辑回归、决策树、随机森林），
+      学习模型评估、特征重要性分析、业务解释。
+
+    objectives:
+      - "理解金融行业分类问题建模流程"
+      - "掌握多种分类算法对比与选择"
+      - "学习不平衡数据处理技巧"
+      - "完成特征重要性分析与业务解释"
+
+    datasets:
+      - "DS-S3-P03-FINANCE"
+
+    techniques:
+      - "逻辑回归（Logistic Regression）"
+      - "决策树（Decision Tree）"
+      - "随机森林（Random Forest）"
+      - "XGBoost梯度提升"
+      - "不平衡数据处理（SMOTE、类权重）"
+      - "特征重要性分析（Feature Importance）"
+      - "混淆矩阵与ROC-AUC评估"
+
+    deliverables:
+      - type: "notebook"
+        path: "notebooks/stage3/p03-finance.ipynb"
+      - type: "script"
+        path: "docs/stage3/projects/p03-finance/src/train.py"
+      - type: "model"
+        path: "docs/stage3/projects/p03-finance/outputs/models/rf_model.pkl"
+      - type: "report"
+        path: "docs/stage3/projects/p03-finance/outputs/reports/report.md"
+
+    expected_metrics:
+      - name: "模型准确率 (Accuracy)"
+        range: "85%-90%"
+        unit: "%"
+      - name: "AUC-ROC Score"
+        range: "0.85-0.92"
+        unit: "score"
+      - name: "F1-Score"
+        range: "0.75-0.85"
+        unit: "score"
+
+    time_estimate:
+      hours: 3-4
+
+    difficulty: "intermediate"
+
+    prerequisites:
+      - "完成M04机器学习进阶"
+      - "理解分类评估指标"
+
+    success_criteria:
+      - "模型AUC≥0.85"
+      - "对比至少3种分类算法"
+      - "提供特征重要性排序与业务解释"
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+  - id: "P04"
+    stage_id: "stage3"
+    name: "通讯公司客户响应速度提升（RFM分析）"
+    name_en: "Telecom Customer Response Analysis (RFM)"
+    industry: "telecom"
+    order: 4
+
+    description: |
+      分析通讯公司客户行为数据，使用RFM模型进行客户细分，
+      预测客户流失风险，提供精准营销策略。
+
+    objectives:
+      - "掌握电信行业客户行为分析"
+      - "应用RFM模型进行客户价值评估"
+      - "构建客户流失预测模型"
+      - "设计客户留存策略"
+
+    datasets:
+      - "DS-S3-P04-TELECOM"
+
+    techniques:
+      - "RFM模型（客户价值评估）"
+      - "逻辑回归（流失预测）"
+      - "特征工程（客户行为特征提取）"
+      - "聚类分析（客户分组）"
+      - "生存分析（客户生命周期）"
+
+    deliverables:
+      - type: "notebook"
+        path: "notebooks/stage3/p04-telecom.ipynb"
+      - type: "script"
+        path: "docs/stage3/projects/p04-telecom/src/churn_prediction.py"
+      - type: "report"
+        path: "docs/stage3/projects/p04-telecom/outputs/reports/report.md"
+
+    expected_metrics:
+      - name: "流失预测准确率 (Churn Prediction Accuracy)"
+        range: "80%-88%"
+        unit: "%"
+      - name: "客户细分数量 (Customer Segments)"
+        range: "4-6"
+        unit: "clusters"
+      - name: "高风险客户识别率 (High-Risk Detection Rate)"
+        range: "75%-85%"
+        unit: "%"
+
+    time_estimate:
+      hours: 3-4
+
+    difficulty: "intermediate"
+
+    prerequisites:
+      - "完成M04机器学习进阶"
+      - "理解RFM模型"
+
+    success_criteria:
+      - "流失预测准确率≥80%"
+      - "客户细分合理（4-6组）"
+      - "提供客户留存策略（≥5条）"
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+  - id: "P05"
+    stage_id: "stage3"
+    name: "零售超市经营分析（SWOT分析）"
+    name_en: "Retail Supermarket Business Analysis (SWOT)"
+    industry: "retail"
+    order: 5
+
+    description: |
+      分析零售超市经营数据，完成SWOT分析框架，
+      识别业务优势与风险，提供运营优化建议。
+
+    objectives:
+      - "掌握零售行业经营分析框架"
+      - "应用SWOT分析方法"
+      - "完成商品关联性分析"
+      - "提供运营优化建议"
+
+    datasets:
+      - "DS-S3-P05-RETAIL"
+
+    techniques:
+      - "SWOT分析框架"
+      - "商品关联分析（Market Basket）"
+      - "销售趋势预测（时间序列）"
+      - "库存优化分析"
+      - "A/B测试分析"
+
+    deliverables:
+      - type: "notebook"
+        path: "notebooks/stage3/p05-retail.ipynb"
+      - type: "script"
+        path: "docs/stage3/projects/p05-retail/src/analyze.py"
+      - type: "report"
+        path: "docs/stage3/projects/p05-retail/outputs/reports/swot_report.md"
+
+    expected_metrics:
+      - name: "商品关联规则数量 (Association Rules)"
+        range: "15-25"
+        unit: "rules"
+      - name: "销售预测MAPE (Forecast MAPE)"
+        range: "10%-15%"
+        unit: "%"
+      - name: "优化策略数量 (Optimization Strategies)"
+        range: "5-10"
+        unit: "strategies"
+
+    time_estimate:
+      hours: 2-3
+
+    difficulty: "beginner"
+
+    prerequisites:
+      - "完成M02 Pandas项目实战"
+      - "完成M04机器学习进阶"
+
+    success_criteria:
+      - "SWOT分析全面（每个维度≥3条）"
+      - "商品关联规则有效（置信度≥60%）"
+      - "提供可落地的优化策略（≥5条）"
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+  - id: "P06"
+    stage_id: "stage3"
+    name: "滴滴出行运营数据异常分析"
+    name_en: "Ride-Hailing Operational Anomaly Detection"
+    industry: "internet"
+    order: 6
+
+    description: |
+      分析出行平台运营数据，识别异常订单与司机行为，
+      构建异常检测模型，提升运营效率与安全性。
+
+    objectives:
+      - "理解互联网平台运营数据分析"
+      - "掌握异常检测算法（Isolation Forest）"
+      - "完成司机行为分析"
+      - "提供运营优化建议"
+
+    datasets:
+      - "DS-S3-P06-INTERNET"
+
+    techniques:
+      - "异常检测（Isolation Forest、DBSCAN）"
+      - "时间序列异常检测（STL分解）"
+      - "司机行为分析（聚类）"
+      - "热力图可视化"
+      - "统计异常检测（3-sigma法则）"
+
+    deliverables:
+      - type: "notebook"
+        path: "notebooks/stage3/p06-internet.ipynb"
+      - type: "script"
+        path: "docs/stage3/projects/p06-internet/src/anomaly_detection.py"
+      - type: "report"
+        path: "docs/stage3/projects/p06-internet/outputs/reports/report.md"
+
+    expected_metrics:
+      - name: "异常订单识别数量 (Anomaly Orders)"
+        range: "100-200"
+        unit: "orders"
+      - name: "异常检测准确率 (Anomaly Detection Accuracy)"
+        range: "80%-90%"
+        unit: "%"
+      - name: "司机行为分组数量 (Driver Behavior Clusters)"
+        range: "4-6"
+        unit: "clusters"
+
+    time_estimate:
+      hours: 3-4
+
+    difficulty: "intermediate"
+
+    prerequisites:
+      - "完成M04机器学习进阶"
+      - "理解异常检测算法"
+
+    success_criteria:
+      - "异常检测准确率≥80%"
+      - "识别至少100个异常订单"
+      - "提供运营优化建议（≥5条）"
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+  - id: "P07"
+    stage_id: "stage3"
+    name: "淘宝百万级用户行为分析（年度复盘）"
+    name_en: "Taobao Million-User Behavior Analysis (Annual Review)"
+    industry: "ecommerce-annual"
+    order: 7
+
+    description: |
+      分析淘宝百万级用户行为数据，完成年度电商数据复盘，
+      学习大规模数据处理、用户行为建模、推荐系统基础。
+
+    objectives:
+      - "掌握百万级数据处理技巧"
+      - "理解用户行为建模方法"
+      - "学习协同过滤推荐算法"
+      - "完成年度电商数据复盘报告"
+
+    datasets:
+      - "DS-S3-P07-ECOMMERCE-ANNUAL"
+
+    techniques:
+      - "大规模数据处理（分块读取、并行计算）"
+      - "用户行为序列分析"
+      - "协同过滤推荐（User-based/Item-based）"
+      - "漏斗分析（Funnel Analysis）"
+      - "用户留存分析（Cohort Analysis）"
+
+    deliverables:
+      - type: "notebook"
+        path: "notebooks/stage3/p07-ecommerce-annual.ipynb"
+      - type: "script"
+        path: "docs/stage3/projects/p07-ecommerce-annual/src/analyze.py"
+      - type: "report"
+        path: "docs/stage3/projects/p07-ecommerce-annual/outputs/reports/annual_report.md"
+
+    expected_metrics:
+      - name: "数据处理速度 (Processing Speed)"
+        range: "1M-2M"
+        unit: "rows/min"
+      - name: "推荐系统准确率 (Recommendation Accuracy)"
+        range: "15%-25%"
+        unit: "%"
+      - name: "用户留存率 (User Retention Rate)"
+        range: "30%-40%"
+        unit: "%"
+
+    time_estimate:
+      hours: 4-5
+
+    difficulty: "advanced"
+
+    prerequisites:
+      - "完成M04机器学习进阶"
+      - "理解推荐系统基础"
+
+    success_criteria:
+      - "成功处理百万级数据（≥1M行）"
+      - "推荐系统准确率≥15%"
+      - "完成年度复盘报告（≥1000字）"
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+  - id: "P08"
+    stage_id: "stage3"
+    name: "航空公司客户价值分析（K-means聚类）"
+    name_en: "Airline Customer Value Analysis (K-means Clustering)"
+    industry: "airline"
+    order: 8
+
+    description: |
+      分析航空公司客户数据，使用K-means聚类进行客户价值分层，
+      构建LRFMC模型，提供会员分级与营销策略。
+
+    objectives:
+      - "理解航空行业客户价值分析"
+      - "掌握K-means聚类算法"
+      - "应用LRFMC模型（Length/Recency/Frequency/Monetary/Class）"
+      - "设计会员分级与营销策略"
+
+    datasets:
+      - "DS-S3-P08-AIRLINE"
+
+    techniques:
+      - "K-means聚类算法"
+      - "LRFMC模型（客户价值评估）"
+      - "肘部法则（Elbow Method）确定K值"
+      - "轮廓系数（Silhouette Score）评估"
+      - "主成分分析（PCA）降维可视化"
+
+    deliverables:
+      - type: "notebook"
+        path: "notebooks/stage3/p08-airline.ipynb"
+      - type: "script"
+        path: "docs/stage3/projects/p08-airline/src/clustering.py"
+      - type: "report"
+        path: "docs/stage3/projects/p08-airline/outputs/reports/customer_segmentation.md"
+
+    expected_metrics:
+      - name: "聚类数量 (Number of Clusters)"
+        range: "4-6"
+        unit: "clusters"
+      - name: "轮廓系数 (Silhouette Score)"
+        range: "0.4-0.6"
+        unit: "score"
+      - name: "高价值客户占比 (High-Value Customer %)"
+        range: "10%-20%"
+        unit: "%"
+
+    time_estimate:
+      hours: 3-4
+
+    difficulty: "intermediate"
+
+    prerequisites:
+      - "完成M04机器学习进阶（聚类部分）"
+      - "理解K-means算法原理"
+
+    success_criteria:
+      - "聚类效果良好（轮廓系数≥0.4）"
+      - "客户分层合理（4-6组）"
+      - "提供会员分级策略（≥5条）"
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+  - id: "P09"
+    stage_id: "stage3"
+    name: "信用贷款前审批项目（风控模型）"
+    name_en: "Credit Loan Pre-Approval (Risk Control Model)"
+    industry: "credit"
+    order: 9
+
+    description: |
+      构建信用贷款审批预测模型，学习金融风控建模流程，
+      对比多种算法，处理不平衡数据，完成模型解释性分析。
+
+    objectives:
+      - "理解金融风控建模流程"
+      - "掌握不平衡数据处理技巧"
+      - "学习模型解释性分析（SHAP）"
+      - "完成信贷风险评分系统"
+
+    datasets:
+      - "DS-S3-P09-CREDIT"
+
+    techniques:
+      - "逻辑回归（可解释性强）"
+      - "XGBoost（高性能）"
+      - "LightGBM（快速训练）"
+      - "SMOTE过采样处理不平衡数据"
+      - "SHAP值模型解释"
+      - "信用评分卡（Scorecard）"
+
+    deliverables:
+      - type: "notebook"
+        path: "notebooks/stage3/p09-credit.ipynb"
+      - type: "script"
+        path: "docs/stage3/projects/p09-credit/src/risk_model.py"
+      - type: "model"
+        path: "docs/stage3/projects/p09-credit/outputs/models/xgb_model.pkl"
+      - type: "report"
+        path: "docs/stage3/projects/p09-credit/outputs/reports/risk_report.md"
+
+    expected_metrics:
+      - name: "模型AUC-ROC"
+        range: "0.85-0.92"
+        unit: "score"
+      - name: "精确率 (Precision)"
+        range: "75%-85%"
+        unit: "%"
+      - name: "召回率 (Recall)"
+        range: "70%-80%"
+        unit: "%"
+
+    time_estimate:
+      hours: 4-5
+
+    difficulty: "advanced"
+
+    prerequisites:
+      - "完成M04机器学习进阶"
+      - "理解金融风控概念"
+
+    success_criteria:
+      - "模型AUC≥0.85"
+      - "完成SHAP值模型解释"
+      - "提供信用评分卡（≥10个特征）"
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+  # ========================================
+  # 阶段4：深度学习 (7个项目)
+  # ========================================
+
+  - id: "P01"
+    stage_id: "stage4"
+    name: "工业视觉检测"
+    name_en: "Industrial Vision Inspection"
+    industry: "manufacturing"
+    order: 1
+
+    description: |
+      使用TensorFlow构建工业缺陷检测模型，学习图像分类、模型训练、
+      TensorFlow Lite部署流程，实现边缘设备推理。
+
+    objectives:
+      - "掌握TensorFlow图像分类建模"
+      - "学习迁移学习（MobileNetV2）"
+      - "完成TensorFlow Lite模型转换"
+      - "实现边缘设备推理（树莓派/手机）"
+
+    datasets:
+      - "DS-S4-P01-INDUSTRIAL-VISION"
+
+    techniques:
+      - "TensorFlow/Keras API"
+      - "MobileNetV2迁移学习"
+      - "图像数据增强（ImageDataGenerator）"
+      - "TensorFlow Lite转换"
+      - "边缘设备部署"
+
+    frameworks:
+      - "TensorFlow 2.15+"
+
+    deliverables:
+      - type: "notebook"
+        path: "notebooks/stage4/p01-industrial-vision.ipynb"
+      - type: "script"
+        path: "docs/stage4/projects/p01-industrial-vision/src/train_tf.py"
+      - type: "model"
+        path: "docs/stage4/projects/p01-industrial-vision/outputs/models/defect_classifier.tflite"
+      - type: "report"
+        path: "docs/stage4/projects/p01-industrial-vision/outputs/reports/report.md"
+
+    expected_metrics:
+      - name: "测试准确率 (Test Accuracy)"
+        range: "90%-95%"
+        unit: "%"
+      - name: "推理速度 (Inference Speed)"
+        range: "20-30"
+        unit: "ms/image"
+      - name: "模型大小 (Model Size)"
+        range: "5-10"
+        unit: "MB"
+
+    time_estimate:
+      hours: 3-4
+
+    difficulty: "intermediate"
+
+    gpu_required: false
+    gpu_recommended: true
+
+    prerequisites:
+      - "完成Stage 4 M01深度学习基础"
+      - "完成Stage 4 M02计算机视觉基础"
+
+    success_criteria:
+      - "测试准确率≥90%"
+      - "TFLite模型推理速度<30ms"
+      - "完成边缘设备部署文档"
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+  - id: "P02"
+    stage_id: "stage4"
+    name: "基于YOLOv11的视频实时检测系统"
+    name_en: "Real-time Video Detection with YOLOv11"
+    industry: "security"
+    order: 2
+    dual_framework: true
+
+    description: |
+      使用PyTorch和TensorFlow双框架实现YOLOv11目标检测，
+      学习实时视频处理、模型优化、推理加速技术。
+
+    objectives:
+      - "掌握YOLOv11目标检测原理"
+      - "学习PyTorch和TensorFlow双框架实现"
+      - "完成实时视频检测系统"
+      - "掌握模型推理优化（TensorRT/ONNX）"
+
+    datasets:
+      - "DS-S4-P02-COCO-SUBSET"
+
+    techniques:
+      - "YOLOv11架构与训练"
+      - "目标检测评估（mAP）"
+      - "实时视频流处理（OpenCV）"
+      - "模型推理优化（ONNX Runtime）"
+      - "多线程推理加速"
+
+    frameworks:
+      - "PyTorch 2.1+"
+      - "TensorFlow 2.15+"
+
+    deliverables:
+      - type: "notebook"
+        path: "notebooks/stage4/p02-yolov11-realtime.ipynb"
+      - type: "script"
+        path: "docs/stage4/projects/p02-yolov11-realtime/src/train_pytorch.py"
+      - type: "script"
+        path: "docs/stage4/projects/p02-yolov11-realtime/src/train_tensorflow.py"
+      - type: "script"
+        path: "docs/stage4/projects/p02-yolov11-realtime/src/inference_realtime.py"
+      - type: "model"
+        path: "docs/stage4/projects/p02-yolov11-realtime/outputs/models/yolov11.onnx"
+      - type: "report"
+        path: "docs/stage4/projects/p02-yolov11-realtime/outputs/reports/comparison_report.md"
+
+    expected_metrics:
+      - name: "mAP@0.5 (COCO)"
+        range: "0.45-0.55"
+        unit: "score"
+      - name: "推理速度 (Inference FPS)"
+        range: "30-60"
+        unit: "fps"
+      - name: "GPU显存占用 (GPU Memory)"
+        range: "2-4"
+        unit: "GB"
+
+    time_estimate:
+      hours: 5-6
+
+    difficulty: "advanced"
+
+    gpu_required: true
+    gpu_recommended: true
+
+    prerequisites:
+      - "完成Stage 4 M02计算机视觉基础"
+      - "理解目标检测原理"
+
+    success_criteria:
+      - "mAP@0.5≥0.45"
+      - "实时推理速度≥30 FPS（GPU）"
+      - "完成PyTorch/TensorFlow双框架对比报告"
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+  - id: "P03"
+    stage_id: "stage4"
+    name: "OCR票据识别"
+    name_en: "OCR Receipt Recognition"
+    industry: "finance"
+    order: 3
+
+    description: |
+      使用PaddlePaddle OCR完成票据识别系统，学习文本检测、文本识别、
+      版面分析技术，实现端到端票据信息提取。
+
+    objectives:
+      - "掌握PaddleOCR使用方法"
+      - "学习文本检测与识别技术"
+      - "完成票据版面分析"
+      - "实现结构化信息提取"
+
+    datasets:
+      - "DS-S4-P03-RECEIPT-OCR"
+
+    techniques:
+      - "PaddleOCR文本检测（DB算法）"
+      - "PaddleOCR文本识别（CRNN）"
+      - "版面分析（Layout Analysis）"
+      - "正则表达式信息提取"
+      - "后处理优化（置信度过滤）"
+
+    frameworks:
+      - "PaddlePaddle 2.5+"
+
+    deliverables:
+      - type: "notebook"
+        path: "notebooks/stage4/p03-ocr.ipynb"
+      - type: "script"
+        path: "docs/stage4/projects/p03-ocr/src/ocr_pipeline.py"
+      - type: "report"
+        path: "docs/stage4/projects/p03-ocr/outputs/reports/report.md"
+
+    expected_metrics:
+      - name: "文本检测召回率 (Detection Recall)"
+        range: "85%-92%"
+        unit: "%"
+      - name: "文本识别准确率 (Recognition Accuracy)"
+        range: "90%-95%"
+        unit: "%"
+      - name: "端到端F1-Score"
+        range: "0.85-0.90"
+        unit: "score"
+
+    time_estimate:
+      hours: 3-4
+
+    difficulty: "intermediate"
+
+    gpu_required: false
+    gpu_recommended: true
+
+    prerequisites:
+      - "完成Stage 4 M02计算机视觉基础"
+      - "理解文本检测与识别原理"
+
+    success_criteria:
+      - "文本识别准确率≥90%"
+      - "端到端F1-Score≥0.85"
+      - "完成票据信息结构化提取"
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+  - id: "P04"
+    stage_id: "stage4"
+    name: "自动驾驶场景图像分割"
+    name_en: "Autonomous Driving Scene Segmentation"
+    industry: "automotive"
+    order: 4
+    dual_framework: true
+
+    description: |
+      使用PyTorch和TensorFlow实现语义分割模型（U-Net/DeepLabV3），
+      学习自动驾驶场景理解、像素级分类、模型评估技术。
+
+    objectives:
+      - "掌握语义分割模型架构"
+      - "学习U-Net与DeepLabV3原理"
+      - "完成双框架实现与对比"
+      - "理解自动驾驶场景理解任务"
+
+    datasets:
+      - "DS-S4-P04-AUTONOMOUS-DRIVING"
+
+    techniques:
+      - "U-Net语义分割"
+      - "DeepLabV3+（Atrous Convolution）"
+      - "多尺度特征融合"
+      - "像素级分类评估（mIoU）"
+      - "后处理优化（CRF）"
+
+    frameworks:
+      - "PyTorch 2.1+"
+      - "TensorFlow 2.15+"
+
+    deliverables:
+      - type: "notebook"
+        path: "notebooks/stage4/p04-image-segmentation.ipynb"
+      - type: "script"
+        path: "docs/stage4/projects/p04-image-segmentation/src/train_pytorch.py"
+      - type: "script"
+        path: "docs/stage4/projects/p04-image-segmentation/src/train_tensorflow.py"
+      - type: "model"
+        path: "docs/stage4/projects/p04-image-segmentation/outputs/models/unet_pytorch.pth"
+      - type: "model"
+        path: "docs/stage4/projects/p04-image-segmentation/outputs/models/unet_tensorflow.h5"
+      - type: "report"
+        path: "docs/stage4/projects/p04-image-segmentation/outputs/reports/comparison_report.md"
+
+    expected_metrics:
+      - name: "mIoU (Mean Intersection over Union)"
+        range: "0.65-0.75"
+        unit: "score"
+      - name: "像素准确率 (Pixel Accuracy)"
+        range: "85%-92%"
+        unit: "%"
+      - name: "推理速度 (Inference Speed)"
+        range: "30-50"
+        unit: "ms/image"
+
+    time_estimate:
+      hours: 5-6
+
+    difficulty: "advanced"
+
+    gpu_required: true
+    gpu_recommended: true
+
+    prerequisites:
+      - "完成Stage 4 M02计算机视觉基础"
+      - "理解语义分割原理"
+
+    success_criteria:
+      - "mIoU≥0.65"
+      - "完成双框架实现与对比"
+      - "理解自动驾驶场景理解任务"
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+  - id: "P05"
+    stage_id: "stage4"
+    name: "医学影像分析"
+    name_en: "Medical Imaging Analysis"
+    industry: "healthcare"
+    order: 5
+
+    description: |
+      使用PyTorch + MONAI构建医学影像分析模型，学习3D图像处理、
+      病灶检测、模型可解释性分析（Grad-CAM）。
+
+    objectives:
+      - "掌握医学影像处理技术"
+      - "学习MONAI医学影像工具库"
+      - "完成病灶检测与分类"
+      - "实现模型可解释性分析"
+
+    datasets:
+      - "DS-S4-P05-MEDICAL-IMAGING"
+
+    techniques:
+      - "3D卷积神经网络"
+      - "MONAI医学影像处理"
+      - "病灶检测与分类"
+      - "Grad-CAM可视化"
+      - "数据增强（医学影像专用）"
+
+    frameworks:
+      - "PyTorch 2.1+"
+      - "MONAI 1.3+"
+
+    deliverables:
+      - type: "notebook"
+        path: "notebooks/stage4/p05-medical-imaging.ipynb"
+      - type: "script"
+        path: "docs/stage4/projects/p05-medical-imaging/src/train_monai.py"
+      - type: "model"
+        path: "docs/stage4/projects/p05-medical-imaging/outputs/models/lesion_detector.pth"
+      - type: "report"
+        path: "docs/stage4/projects/p05-medical-imaging/outputs/reports/report.md"
+
+    expected_metrics:
+      - name: "分类准确率 (Classification Accuracy)"
+        range: "85%-92%"
+        unit: "%"
+      - name: "AUC-ROC"
+        range: "0.88-0.95"
+        unit: "score"
+      - name: "敏感度 (Sensitivity)"
+        range: "80%-90%"
+        unit: "%"
+
+    time_estimate:
+      hours: 4-5
+
+    difficulty: "advanced"
+
+    gpu_required: true
+    gpu_recommended: true
+
+    prerequisites:
+      - "完成Stage 4 M02计算机视觉基础"
+      - "理解医学影像分析基础"
+
+    success_criteria:
+      - "分类准确率≥85%"
+      - "完成Grad-CAM可视化"
+      - "理解医学影像分析流程"
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+  - id: "P06"
+    stage_id: "stage4"
+    name: "基于Transformer的翻译系统"
+    name_en: "Transformer-based Translation System"
+    industry: "nlp"
+    order: 6
+    dual_framework: true
+
+    description: |
+      使用PyTorch和TensorFlow实现Transformer机器翻译模型，
+      学习Attention机制、Seq2Seq架构、BLEU评估指标。
+
+    objectives:
+      - "掌握Transformer架构原理"
+      - "学习Self-Attention与Multi-Head Attention"
+      - "完成双框架实现与对比"
+      - "理解机器翻译评估（BLEU）"
+
+    datasets:
+      - "DS-S4-P06-TRANSLATION"
+
+    techniques:
+      - "Transformer架构"
+      - "Self-Attention机制"
+      - "Positional Encoding"
+      - "Beam Search解码"
+      - "BLEU评估指标"
+
+    frameworks:
+      - "PyTorch 2.1+"
+      - "TensorFlow 2.15+"
+
+    deliverables:
+      - type: "notebook"
+        path: "notebooks/stage4/p06-transformer-translation.ipynb"
+      - type: "script"
+        path: "docs/stage4/projects/p06-transformer-translation/src/train_pytorch.py"
+      - type: "script"
+        path: "docs/stage4/projects/p06-transformer-translation/src/train_tensorflow.py"
+      - type: "model"
+        path: "docs/stage4/projects/p06-transformer-translation/outputs/models/transformer_pytorch.pth"
+      - type: "model"
+        path: "docs/stage4/projects/p06-transformer-translation/outputs/models/transformer_tensorflow.h5"
+      - type: "report"
+        path: "docs/stage4/projects/p06-transformer-translation/outputs/reports/comparison_report.md"
+
+    expected_metrics:
+      - name: "BLEU Score"
+        range: "25-35"
+        unit: "score"
+      - name: "训练收敛速度 (Training Convergence)"
+        range: "20-30"
+        unit: "epochs"
+      - name: "推理速度 (Inference Speed)"
+        range: "50-100"
+        unit: "tokens/sec"
+
+    time_estimate:
+      hours: 5-6
+
+    difficulty: "advanced"
+
+    gpu_required: true
+    gpu_recommended: true
+
+    prerequisites:
+      - "完成Stage 4 M03 NLP基础"
+      - "理解Transformer架构"
+
+    success_criteria:
+      - "BLEU Score≥25"
+      - "完成双框架实现与对比"
+      - "理解Attention机制原理"
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+  - id: "P07"
+    stage_id: "stage4"
+    name: "基于预训练模型的信息提取系统"
+    name_en: "Pre-trained Model Information Extraction"
+    industry: "nlp"
+    order: 7
+
+    description: |
+      使用BERT预训练模型完成命名实体识别（NER）与关系抽取任务，
+      学习预训练模型Fine-tuning、序列标注评估技术。
+
+    objectives:
+      - "掌握BERT预训练模型使用"
+      - "学习模型Fine-tuning技术"
+      - "完成命名实体识别（NER）"
+      - "实现关系抽取（Relation Extraction）"
+
+    datasets:
+      - "DS-S4-P07-INFO-EXTRACTION"
+
+    techniques:
+      - "BERT预训练模型"
+      - "Token Classification（序列标注）"
+      - "CRF层优化"
+      - "命名实体识别（NER）"
+      - "关系抽取"
+
+    frameworks:
+      - "PyTorch 2.1+"
+      - "Transformers 4.35+"
+
+    deliverables:
+      - type: "notebook"
+        path: "notebooks/stage4/p07-pretrained-info-extraction.ipynb"
+      - type: "script"
+        path: "docs/stage4/projects/p07-pretrained-info-extraction/src/train_ner.py"
+      - type: "model"
+        path: "docs/stage4/projects/p07-pretrained-info-extraction/outputs/models/bert_ner.pth"
+      - type: "report"
+        path: "docs/stage4/projects/p07-pretrained-info-extraction/outputs/reports/report.md"
+
+    expected_metrics:
+      - name: "NER F1-Score"
+        range: "0.85-0.92"
+        unit: "score"
+      - name: "关系抽取准确率 (Relation Extraction Accuracy)"
+        range: "75%-85%"
+        unit: "%"
+      - name: "推理速度 (Inference Speed)"
+        range: "100-200"
+        unit: "samples/sec"
+
+    time_estimate:
+      hours: 4-5
+
+    difficulty: "advanced"
+
+    gpu_required: false
+    gpu_recommended: true
+
+    prerequisites:
+      - "完成Stage 4 M03 NLP基础"
+      - "理解预训练模型原理"
+
+    success_criteria:
+      - "NER F1-Score≥0.85"
+      - "关系抽取准确率≥75%"
+      - "完成BERT Fine-tuning流程"
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+  # ========================================
+  # 阶段5：AIGC与大模型 (1个综合项目)
+  # ========================================
+
+  - id: "P01"
+    stage_id: "stage5"
+    name: "基于LLM的对话系统（RAG + Agent）"
+    name_en: "LLM-based Dialogue System (RAG + Agent)"
+    industry: "ai-application"
+    order: 1
+
+    description: |
+      构建端到端大语言模型对话系统，集成RAG知识库问答与Agent工具调用，
+      学习LangChain应用开发、向量检索、模型部署全流程。
+
+    objectives:
+      - "掌握LangChain应用开发"
+      - "实现RAG知识库问答系统"
+      - "完成Agent工具调用功能"
+      - "学习模型部署与优化"
+
+    datasets:
+      - "DS-S5-P01-DIALOGUE-KB"
+      - "DS-S5-P01-RAG-CORPUS"
+
+    techniques:
+      - "LangChain框架（Chain/Prompt/Memory）"
+      - "RAG架构（Retrieval/Ranking/Generation）"
+      - "向量数据库（ChromaDB/FAISS）"
+      - "Agent工具调用（ReAct/Function Calling）"
+      - "Prompt Engineering"
+      - "模型部署（vLLM/Ollama）"
+
+    frameworks:
+      - "LangChain 0.1+"
+      - "ChromaDB 0.4+"
+      - "Transformers 4.35+"
+
+    deliverables:
+      - type: "notebook"
+        path: "notebooks/stage5/p01-dialogue-system.ipynb"
+      - type: "script"
+        path: "docs/stage5/projects/p01-dialogue-system/src/rag_pipeline.py"
+      - type: "script"
+        path: "docs/stage5/projects/p01-dialogue-system/src/agent_system.py"
+      - type: "script"
+        path: "docs/stage5/projects/p01-dialogue-system/src/api_server.py"
+      - type: "report"
+        path: "docs/stage5/projects/p01-dialogue-system/outputs/reports/report.md"
+
+    expected_metrics:
+      - name: "RAG检索准确率 (Retrieval Accuracy)"
+        range: "85%-92%"
+        unit: "%"
+      - name: "对话连贯性评分 (Coherence Score)"
+        range: "4.0-4.5"
+        unit: "score (1-5)"
+      - name: "Agent工具调用成功率 (Tool Call Success Rate)"
+        range: "90%-95%"
+        unit: "%"
+      - name: "ROUGE-L Score"
+        range: "0.35-0.45"
+        unit: "score"
+
+    time_estimate:
+      hours: 8-16
+
+    difficulty: "advanced"
+
+    gpu_required: false
+    gpu_recommended: true
+
+    prerequisites:
+      - "完成Stage 5 M01 AIGC与LLM概述"
+      - "完成Stage 5 M02大模型开发"
+
+    success_criteria:
+      - "RAG检索准确率≥85%"
+      - "Agent工具调用成功率≥90%"
+      - "完成API服务部署"
+      - "提供系统演示视频（≥5分钟）"
+
+    metadata:
+      created_at: "2025-01-15"
+      status: "active"
+
+# ========== 项目统计 ==========
+# 总项目数: 17个
+# Stage 3: 9个项目（行业覆盖：医疗/电商/金融/通讯/零售/互联网/航空/信贷）
+# Stage 4: 7个项目（行业覆盖：制造/安防/金融/汽车/医疗/NLP），其中3个双框架
+# Stage 5: 1个综合项目（对话系统）
+
+# 双框架项目:
+# - P02 (Stage 4): YOLOv11实时检测 (PyTorch + TensorFlow)
+# - P04 (Stage 4): 图像分割 (PyTorch + TensorFlow)
+# - P06 (Stage 4): Transformer翻译 (PyTorch + TensorFlow)

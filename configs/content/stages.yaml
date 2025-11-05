@@ -1,0 +1,297 @@
+# 学习阶段配置 (Learning Stages Configuration)
+# 定义三个核心学习阶段及其属性
+# Version: 1.0.0
+
+stages:
+  # ========== 阶段3：机器学习与数据挖掘 ==========
+  - id: stage3
+    name: "机器学习与数据挖掘"
+    name_en: "Machine Learning & Data Mining"
+    priority: "P1"  # MVP核心阶段
+    level: "beginner"
+
+    description: |
+      掌握传统机器学习算法与数据分析技能，学习NumPy/Pandas数据处理，
+      scikit-learn建模流程，完成端到端机器学习项目。
+      适合有Python基础但缺乏AI经验的工程师。
+
+    learning_objectives:
+      - "掌握NumPy/Pandas进行数据清洗、处理与分析"
+      - "理解机器学习核心概念（监督学习、无监督学习、评估指标）"
+      - "熟练使用scikit-learn完成分类、回归、聚类任务"
+      - "掌握集成学习方法（随机森林、GBDT、XGBoost）"
+      - "理解特征工程与模型调优流程"
+      - "具备业务问题抽象与建模能力"
+
+    prerequisites:
+      python_version: ">=3.9"
+      math_knowledge:
+        - "线性代数基础（矩阵运算、向量空间）"
+        - "概率论基础（概率分布、期望、方差）"
+        - "微积分基础（导数、梯度概念）"
+      programming_skills:
+        - "Python 基础语法（函数、类、异常处理）"
+        - "3-5年Python后端开发经验"
+        - "熟悉Jupyter Notebook使用"
+
+    modules:
+      - "M01"  # 科学计算库
+      - "M02"  # Pandas项目实战
+      - "M03"  # AI数学基础
+      - "M04"  # 机器学习进阶
+
+    projects:
+      - "P01"  # 朝阳医院指标搭建
+      - "P02"  # 服装零售销售数据分析
+      - "P03"  # 银行电话营销活动分析
+      - "P04"  # 通讯公司客户响应速度提升
+      - "P05"  # 零售超市经营分析
+      - "P06"  # 滴滴出行运营数据异常分析
+      - "P07"  # 淘宝百万级用户行为分析
+      - "P08"  # 航空公司客户价值分析
+      - "P09"  # 信用贷款前审批项目
+
+    time_estimate:
+      theory_hours: 2-3
+      practice_hours: 2-3
+      total_hours: 4-6
+
+    hardware_requirements:
+      cpu: "双核 Intel/AMD (2.0GHz+)"
+      memory: "8GB RAM (推荐16GB)"
+      disk: "5GB 可用空间"
+      gpu: "不需要"
+      os:
+        - "macOS 10.15+"
+        - "Ubuntu 20.04+"
+        - "Windows 10/11 (原生/WSL2)"
+
+    key_dependencies:
+      - name: "numpy"
+        version: ">=1.26.0,<2.0.0"
+        purpose: "数组计算与科学计算基础"
+      - name: "pandas"
+        version: ">=2.1.0,<3.0.0"
+        purpose: "数据清洗与分析"
+      - name: "scikit-learn"
+        version: ">=1.3.0,<2.0.0"
+        purpose: "传统机器学习算法"
+      - name: "matplotlib"
+        version: ">=3.8.0,<4.0.0"
+        purpose: "数据可视化"
+      - name: "seaborn"
+        version: ">=0.13.0,<1.0.0"
+        purpose: "统计图表"
+      - name: "xgboost"
+        version: ">=2.0.0,<3.0.0"
+        purpose: "梯度提升算法"
+
+    success_criteria:
+      - "能独立完成9个项目中至少7个（≥78%完成率）"
+      - "项目输出指标落在预期范围内（±5%误差）"
+      - "理解并能解释模型选择与超参数调优逻辑"
+      - "代码通过质量检查（black, ruff, mypy）"
+
+    next_stage: "stage4"
+
+    metadata:
+      created_at: "2025-01-15"
+      updated_at: "2025-01-15"
+      version: "1.0.0"
+      status: "active"
+
+  # ========== 阶段4：深度学习 ==========
+  - id: stage4
+    name: "深度学习"
+    name_en: "Deep Learning"
+    priority: "P2"
+    level: "intermediate"
+
+    description: |
+      掌握深度学习框架（PyTorch/TensorFlow）与现代神经网络架构，
+      学习计算机视觉（CNN/YOLO）与自然语言处理（Transformer）技术，
+      完成迁移学习与模型部署项目。
+
+    learning_objectives:
+      - "掌握PyTorch/TensorFlow基础API与训练流程"
+      - "理解深度学习核心概念（反向传播、优化器、正则化）"
+      - "掌握CNN在图像分类、目标检测、图像分割中的应用"
+      - "理解Transformer架构与预训练模型使用"
+      - "熟悉迁移学习与模型微调技术"
+      - "具备模型部署与推理优化能力"
+
+    prerequisites:
+      python_version: ">=3.9"
+      math_knowledge:
+        - "线性代数进阶（特征值、SVD）"
+        - "概率论进阶（贝叶斯定理、最大似然估计）"
+        - "微积分进阶（链式法则、梯度下降）"
+      programming_skills:
+        - "完成阶段3学习（Stage 3 Complete）"
+        - "理解神经网络基本原理"
+        - "熟悉GPU环境配置（可选）"
+
+    modules:
+      - "M01"  # 深度学习基础理论
+      - "M02"  # 计算机视觉基础
+      - "M03"  # 自然语言处理基础
+
+    projects:
+      - "P01"  # 工业视觉检测（TensorFlow）
+      - "P02"  # YOLOv11实时检测（双框架）
+      - "P03"  # OCR票据识别（PaddlePaddle）
+      - "P04"  # 自动驾驶图像分割（双框架）
+      - "P05"  # 医学影像分析（PyTorch + MONAI）
+      - "P06"  # Transformer翻译系统（双框架）
+      - "P07"  # 预训练模型信息提取
+
+    time_estimate:
+      theory_hours: 3-5
+      practice_hours: 3-5
+      total_hours: 6-10
+
+    hardware_requirements:
+      cpu: "四核 Intel/AMD (3.0GHz+)"
+      memory: "16GB RAM (推荐32GB)"
+      disk: "20GB 可用空间"
+      gpu: "推荐 NVIDIA GPU (8GB+ VRAM) 或 Apple M系列 (MPS)"
+      os:
+        - "macOS 10.15+ (MPS支持需M系列芯片)"
+        - "Ubuntu 20.04+ (CUDA 11.8+)"
+        - "Windows 10/11 with WSL2 (CUDA支持)"
+
+    key_dependencies:
+      - name: "torch"
+        version: ">=2.1.0,<3.0.0"
+        purpose: "PyTorch深度学习框架"
+      - name: "torchvision"
+        version: ">=0.16.0,<1.0.0"
+        purpose: "计算机视觉工具"
+      - name: "tensorflow"
+        version: ">=2.15.0,<3.0.0"
+        purpose: "TensorFlow深度学习框架"
+      - name: "transformers"
+        version: ">=4.35.0,<5.0.0"
+        purpose: "预训练模型库"
+      - name: "opencv-python"
+        version: ">=4.8.0,<5.0.0"
+        purpose: "图像处理"
+      - name: "ultralytics"
+        version: ">=8.0.0,<9.0.0"
+        purpose: "YOLOv11目标检测"
+
+    success_criteria:
+      - "能独立完成7个项目中至少5个（≥71%完成率）"
+      - "至少掌握PyTorch或TensorFlow一种框架"
+      - "能完成1个核心双框架项目（P02/P04/P06之一）"
+      - "理解迁移学习与模型微调流程"
+      - "GPU训练速度提升≥5倍（相比CPU）"
+
+    previous_stage: "stage3"
+    next_stage: "stage5"
+
+    metadata:
+      created_at: "2025-01-15"
+      updated_at: "2025-01-15"
+      version: "1.0.0"
+      status: "active"
+
+  # ========== 阶段5：AIGC与大模型 ==========
+  - id: stage5
+    name: "AIGC与大模型"
+    name_en: "AIGC & Large Language Models"
+    priority: "P3"
+    level: "advanced"
+
+    description: |
+      掌握大语言模型应用开发技术，学习Prompt Engineering、RAG、Agent框架，
+      完成端到端对话系统与知识库问答项目，具备生成式AI产品开发能力。
+
+    learning_objectives:
+      - "理解大语言模型原理与主流LLM对比（GPT/Claude/DeepSeek）"
+      - "掌握Prompt Engineering技巧与Few-shot Learning"
+      - "熟练使用LangChain构建LLM应用"
+      - "理解RAG（检索增强生成）架构与实现"
+      - "掌握Agent框架与工具调用机制"
+      - "了解模型微调技术（LoRA/QLoRA）"
+      - "具备对话系统与知识库问答开发能力"
+
+    prerequisites:
+      python_version: ">=3.9"
+      math_knowledge:
+        - "理解Transformer架构原理"
+        - "理解自注意力机制（Self-Attention）"
+        - "理解向量检索与语义相似度"
+      programming_skills:
+        - "完成阶段4学习（Stage 4 Complete）"
+        - "理解API调用与异步编程"
+        - "熟悉向量数据库基本概念"
+
+    modules:
+      - "M01"  # AIGC与LLM概述
+      - "M02"  # 大模型开发
+
+    projects:
+      - "P01"  # 基于LLM的对话系统（RAG + Agent）
+
+    time_estimate:
+      theory_hours: 0.5-1
+      practice_hours: 0.5-1
+      total_hours: 1-2
+
+    hardware_requirements:
+      cpu: "四核 Intel/AMD (3.0GHz+)"
+      memory: "16GB RAM (推荐32GB，运行本地LLM需32GB+)"
+      disk: "30GB 可用空间（含LLM模型）"
+      gpu: "可选 NVIDIA GPU (8GB+ VRAM) 用于本地模型推理"
+      os:
+        - "macOS 10.15+ (支持本地LLM)"
+        - "Ubuntu 20.04+"
+        - "Windows 10/11 with WSL2"
+
+    key_dependencies:
+      - name: "langchain"
+        version: ">=0.1.0,<1.0.0"
+        purpose: "LLM应用开发框架"
+      - name: "transformers"
+        version: ">=4.35.0,<5.0.0"
+        purpose: "预训练模型与Tokenizer"
+      - name: "chromadb"
+        version: ">=0.4.0,<1.0.0"
+        purpose: "向量数据库"
+      - name: "openai"
+        version: ">=1.0.0,<2.0.0"
+        purpose: "OpenAI API客户端"
+      - name: "tiktoken"
+        version: ">=0.5.0,<1.0.0"
+        purpose: "Token计数"
+      - name: "faiss-cpu"
+        version: ">=1.7.0,<2.0.0"
+        purpose: "向量检索（CPU版本）"
+
+    success_criteria:
+      - "完成对话系统综合项目（P01）"
+      - "实现RAG知识库问答功能（检索准确率≥85%）"
+      - "实现Agent工具调用功能（≥3个工具）"
+      - "理解Prompt Engineering最佳实践"
+      - "能评估生成质量（ROUGE/BLEU指标）"
+
+    previous_stage: "stage4"
+
+    metadata:
+      created_at: "2025-01-15"
+      updated_at: "2025-01-15"
+      version: "1.0.0"
+      status: "active"
+
+# ========== 阶段依赖关系图 ==========
+# stage3 (P1, beginner, 4-6h)
+#   ↓ 前置依赖
+# stage4 (P2, intermediate, 6-10h)
+#   ↓ 前置依赖
+# stage5 (P3, advanced, 1-2d)
+
+# ========== 总体统计 ==========
+# 总学习时间: 11-18小时（理论 + 实践）
+# 总项目数: 17个（stage3: 9, stage4: 7, stage5: 1）
+# 总模块数: 9个（stage3: 4, stage4: 3, stage5: 2）
