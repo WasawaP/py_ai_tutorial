@@ -1,0 +1,147 @@
+# P02 Ecommerce Data Analysis Configuration
+# 服装零售销售数据分析配置文件
+
+# Data paths
+data:
+  input_file: "data/stage3/clothing_retail.csv"
+  output_dir: "docs/stage3/projects/p02-ecommerce/outputs"
+  processed_data_dir: "docs/stage3/projects/p02-ecommerce/outputs/processed_data"
+
+# Data loading
+loading:
+  encoding: "utf-8"
+  parse_dates: ["order_date"]
+  dtype:
+    order_id: str
+    customer_id: str
+    product_id: str
+
+# RFM Analysis
+rfm:
+  # RFM评分分位数（5档：1-5分）
+  score_bins: 5
+  # 是否使用分位数（True）还是等宽分箱（False）
+  use_quantile: true
+
+  # 客户细分规则（基于R/F/M评分）
+  segments:
+    重要价值客户:
+      R_min: 4
+      F_min: 4
+      M_min: 4
+    重要保持客户:
+      R_min: 4
+      F_min: 2
+      M_min: 2
+    重要挽留客户:
+      R_max: 2
+      F_min: 4
+      M_min: 4
+    一般发展客户:
+      R_min: 2
+      F_min: 3
+      M_min: 3
+    一般维持客户:
+      R_min: 2
+      F_min: 2
+      M_min: 2
+    一般挽留客户:
+      R_max: 2
+      F_min: 2
+      M_min: 2
+    潜在客户:
+      default: true
+
+# Analysis parameters
+analysis:
+  # TOP N分析
+  top_n: 10
+
+  # 分析维度
+  dimensions:
+    - "category"
+    - "brand"
+    - "channel"
+    - "region"
+    - "customer_gender"
+
+  # 时间聚合
+  time_aggregations:
+    - "monthly"
+    - "quarterly"
+
+# Visualization
+visualization:
+  # 图表设置
+  figure:
+    dpi: 300
+    format: "png"
+    figsize_default: [12, 6]
+    style: "seaborn-v0_8"
+
+  # 字体
+  fonts:
+    family: ["SimHei", "Arial Unicode MS", "DejaVu Sans"]
+    size: 12
+    title_size: 16
+
+  # 颜色
+  colors:
+    palette: "Set2"
+    cmap: "viridis"
+
+  # 图表列表
+  charts:
+    - name: "customer_segments_pie"
+      type: "pie"
+      title: "客户细分分布"
+      enabled: true
+
+    - name: "rfm_heatmap"
+      type: "heatmap"
+      title: "客户群体RFM热力图"
+      enabled: true
+
+    - name: "category_sales_bar"
+      type: "bar"
+      title: "各类别销售额对比"
+      enabled: true
+
+    - name: "monthly_trend"
+      type: "line"
+      title: "月度销售趋势"
+      enabled: true
+
+    - name: "top_products"
+      type: "barh"
+      title: "TOP10畅销商品"
+      enabled: true
+
+    - name: "customer_behavior"
+      type: "scatter"
+      title: "客户购买行为分析"
+      enabled: true
+
+# Report generation
+report:
+  format: "markdown"
+  include_sections:
+    - "overview"
+    - "rfm_analysis"
+    - "customer_segments"
+    - "sales_analysis"
+    - "recommendations"
+
+  metrics:
+    - "total_customers"
+    - "total_orders"
+    - "total_sales"
+    - "avg_order_value"
+    - "repurchase_rate"
+    - "segment_distribution"
+
+# Logging
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "docs/stage3/projects/p02-ecommerce/outputs/analysis.log"

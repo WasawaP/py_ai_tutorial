@@ -1,0 +1,449 @@
+# 环境配置画像 (Environment Profiles Configuration)
+# 定义6个跨平台环境配置及其安装步骤
+# Version: 1.0.0
+
+environments:
+  # ========== macOS Intel (x86_64) ==========
+  - id: "env-macos-intel"
+    name: "macOS Intel (x86_64)"
+    name_en: "macOS Intel (x86_64)"
+    os_type: "macos"
+    os_variant: "Intel芯片 (x86_64架构)"
+
+    hardware:
+      cpu_arch: "x86_64"
+      gpu_available: false
+      gpu_type: null
+      min_ram_gb: 8
+
+    python_version: ">=3.9,<3.13"
+    recommended_python: "3.11"
+
+    installation_steps:
+      - order: 1
+        description: "安装Homebrew（若未安装）"
+        commands:
+          - '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
+        notes: "若已安装Homebrew，跳过此步骤。Homebrew路径: /usr/local"
+
+      - order: 2
+        description: "安装Python 3.11"
+        commands:
+          - "brew install python@3.11"
+          - "python3.11 --version"
+        notes: null
+
+      - order: 3
+        description: "安装uv包管理工具"
+        commands:
+          - "curl -LsSf https://astral.sh/uv/install.sh | sh"
+          - "source $HOME/.cargo/env"
+          - "uv --version"
+        notes: "若curl失败，可使用pipx安装: pipx install uv"
+
+      - order: 4
+        description: "克隆项目并创建虚拟环境"
+        commands:
+          - "git clone https://github.com/yourusername/py_ai_tutorial.git"
+          - "cd py_ai_tutorial"
+          - "uv venv --python 3.11"
+          - "source .venv/bin/activate"
+        notes: null
+
+      - order: 5
+        description: "安装项目依赖"
+        commands:
+          - 'uv pip install -e ".[stage3]"'
+        notes: "首次安装可能需要5-10分钟"
+
+    common_issues:
+      - symptom: "运行`uv`命令时提示 command not found"
+        cause: "uv安装后未添加到PATH"
+        solution: "重启终端，或手动执行 source $HOME/.cargo/env"
+
+      - symptom: "安装PyTorch时报错 ld: library not found for -lSystem"
+        cause: "Xcode Command Line Tools未安装或损坏"
+        solution: "运行 xcode-select --install 重新安装"
+
+      - symptom: "导入NumPy时报错 ImportError: dlopen failed"
+        cause: "Homebrew安装的Python与系统Python冲突"
+        solution: "使用完整路径 /usr/local/bin/python3.11 或重新创建虚拟环境"
+
+    verification_script: "scripts/env/verify-macos-intel.sh"
+    doc_path: "docs/cross-platform/setup-macos-intel.md"
+
+  # ========== macOS Apple Silicon (arm64) ==========
+  - id: "env-macos-arm64"
+    name: "macOS Apple Silicon (arm64)"
+    name_en: "macOS Apple Silicon (arm64)"
+    os_type: "macos"
+    os_variant: "Apple Silicon (arm64架构，M1/M2/M3系列)"
+
+    hardware:
+      cpu_arch: "arm64"
+      gpu_available: true
+      gpu_type: "Apple GPU (MPS)"
+      min_ram_gb: 8
+
+    python_version: ">=3.9,<3.13"
+    recommended_python: "3.11"
+
+    installation_steps:
+      - order: 1
+        description: "安装Homebrew（若未安装）"
+        commands:
+          - '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
+        notes: "Homebrew路径: /opt/homebrew (Apple Silicon专用)"
+
+      - order: 2
+        description: "安装Python 3.11"
+        commands:
+          - "brew install python@3.11"
+          - "python3.11 --version"
+        notes: null
+
+      - order: 3
+        description: "安装uv包管理工具"
+        commands:
+          - "curl -LsSf https://astral.sh/uv/install.sh | sh"
+          - "source $HOME/.cargo/env"
+          - "uv --version"
+        notes: null
+
+      - order: 4
+        description: "克隆项目并创建虚拟环境"
+        commands:
+          - "git clone https://github.com/yourusername/py_ai_tutorial.git"
+          - "cd py_ai_tutorial"
+          - "uv venv --python 3.11"
+          - "source .venv/bin/activate"
+        notes: null
+
+      - order: 5
+        description: "安装项目依赖 (CPU版本)"
+        commands:
+          - 'uv pip install -e ".[stage3]"'
+        notes: "首次安装可能需要5-10分钟"
+
+      - order: 6
+        description: "安装MPS后端支持 (可选，用于GPU加速)"
+        commands:
+          - 'uv pip install -e ".[stage4-mps]"'
+          - "python -c 'import torch; print(torch.backends.mps.is_available())'"
+        notes: "仅在需要GPU加速时安装。验证应输出True"
+
+    common_issues:
+      - symptom: "TensorFlow安装失败"
+        cause: "TensorFlow官方版本不支持Apple Silicon"
+        solution: "使用 tensorflow-macos 和 tensorflow-metal: pip install tensorflow-macos tensorflow-metal"
+
+      - symptom: "PyTorch MPS报错 NotImplementedError"
+        cause: "某些算子在MPS后端不支持"
+        solution: "使用CPU回退: device = 'mps' if torch.backends.mps.is_available() else 'cpu'"
+
+      - symptom: "NumPy版本冲突"
+        cause: "部分库需要特定NumPy版本"
+        solution: "降级NumPy: uv pip install 'numpy<2.0'"
+
+    verification_script: "scripts/env/verify-macos-arm64.sh"
+    doc_path: "docs/cross-platform/setup-macos-arm64.md"
+
+  # ========== Linux (Ubuntu 20.04+) ==========
+  - id: "env-linux-ubuntu"
+    name: "Linux (Ubuntu 20.04+)"
+    name_en: "Linux (Ubuntu 20.04+)"
+    os_type: "linux"
+    os_variant: "Ubuntu 20.04/22.04/24.04"
+
+    hardware:
+      cpu_arch: "x86_64"
+      gpu_available: false
+      gpu_type: null
+      min_ram_gb: 8
+
+    python_version: ">=3.9,<3.13"
+    recommended_python: "3.11"
+
+    installation_steps:
+      - order: 1
+        description: "更新包管理器"
+        commands:
+          - "sudo apt update"
+        notes: null
+
+      - order: 2
+        description: "安装Python 3.11"
+        commands:
+          - "sudo apt install software-properties-common"
+          - "sudo add-apt-repository ppa:deadsnakes/ppa"
+          - "sudo apt update"
+          - "sudo apt install python3.11 python3.11-dev python3.11-venv"
+          - "python3.11 --version"
+        notes: "若系统自带Python 3.11+，可跳过ppa步骤"
+
+      - order: 3
+        description: "安装uv包管理工具"
+        commands:
+          - "curl -LsSf https://astral.sh/uv/install.sh | sh"
+          - "source $HOME/.cargo/env"
+          - "uv --version"
+        notes: null
+
+      - order: 4
+        description: "克隆项目并创建虚拟环境"
+        commands:
+          - "git clone https://github.com/yourusername/py_ai_tutorial.git"
+          - "cd py_ai_tutorial"
+          - "uv venv --python 3.11"
+          - "source .venv/bin/activate"
+        notes: null
+
+      - order: 5
+        description: "安装项目依赖"
+        commands:
+          - 'uv pip install -e ".[stage3]"'
+        notes: "首次安装可能需要5-10分钟"
+
+    common_issues:
+      - symptom: "无法添加ppa仓库"
+        cause: "缺少software-properties-common包"
+        solution: "先安装: sudo apt install software-properties-common"
+
+      - symptom: "pip安装时报错 externally-managed-environment"
+        cause: "Ubuntu 23.04+默认禁止全局pip install"
+        solution: "使用虚拟环境（已通过uv venv创建）或使用pipx"
+
+      - symptom: "某些包编译失败，缺少头文件"
+        cause: "缺少开发工具包"
+        solution: "安装: sudo apt install build-essential python3.11-dev"
+
+    verification_script: "scripts/env/verify-linux.sh"
+    doc_path: "docs/cross-platform/setup-linux.md"
+
+  # ========== Linux with GPU (Ubuntu + CUDA) ==========
+  - id: "env-linux-gpu"
+    name: "Linux with GPU (Ubuntu + CUDA)"
+    name_en: "Linux with GPU (Ubuntu + CUDA)"
+    os_type: "linux"
+    os_variant: "Ubuntu 20.04+ with NVIDIA GPU"
+
+    hardware:
+      cpu_arch: "x86_64"
+      gpu_available: true
+      gpu_type: "NVIDIA GPU (CUDA 11.8+)"
+      min_ram_gb: 16
+
+    python_version: ">=3.9,<3.13"
+    recommended_python: "3.11"
+
+    installation_steps:
+      - order: 1
+        description: "验证NVIDIA驱动和CUDA"
+        commands:
+          - "nvidia-smi"
+        notes: "应显示GPU信息和CUDA版本。若无输出，需先安装NVIDIA驱动"
+
+      - order: 2
+        description: "安装Python 3.11"
+        commands:
+          - "sudo apt update"
+          - "sudo apt install python3.11 python3.11-dev python3.11-venv"
+        notes: null
+
+      - order: 3
+        description: "安装uv包管理工具"
+        commands:
+          - "curl -LsSf https://astral.sh/uv/install.sh | sh"
+          - "source $HOME/.cargo/env"
+        notes: null
+
+      - order: 4
+        description: "克隆项目并创建虚拟环境"
+        commands:
+          - "git clone https://github.com/yourusername/py_ai_tutorial.git"
+          - "cd py_ai_tutorial"
+          - "uv venv --python 3.11"
+          - "source .venv/bin/activate"
+        notes: null
+
+      - order: 5
+        description: "安装GPU版本依赖"
+        commands:
+          - 'uv pip install -e ".[stage3,stage4-gpu]"'
+          - "python -c 'import torch; print(torch.cuda.is_available())'"
+        notes: "验证应输出True。若为False，检查CUDA版本是否匹配"
+
+    common_issues:
+      - symptom: "torch.cuda.is_available()返回False"
+        cause: "CUDA版本不匹配或驱动未安装"
+        solution: "检查nvidia-smi输出的CUDA版本，安装对应的PyTorch版本"
+
+      - symptom: "训练时报错 CUDA out of memory"
+        cause: "GPU内存不足"
+        solution: "减小batch size或使用梯度累积"
+
+      - symptom: "cuDNN版本不匹配"
+        cause: "PyTorch与cuDNN版本不兼容"
+        solution: "使用PyTorch官方推荐的CUDA版本: 11.8或12.1"
+
+    verification_script: "scripts/env/verify-gpu.sh"
+    doc_path: "docs/cross-platform/setup-linux.md"
+
+  # ========== Windows (WSL2) ==========
+  - id: "env-windows-wsl2"
+    name: "Windows with WSL2 (推荐)"
+    name_en: "Windows with WSL2 (Recommended)"
+    os_type: "windows"
+    os_variant: "Windows 10/11 + WSL2 (Ubuntu)"
+
+    hardware:
+      cpu_arch: "x86_64"
+      gpu_available: false
+      gpu_type: null
+      min_ram_gb: 8
+
+    python_version: ">=3.9,<3.13"
+    recommended_python: "3.11"
+
+    installation_steps:
+      - order: 1
+        description: "启用WSL2"
+        commands:
+          - "wsl --install"
+        notes: "在PowerShell（管理员）中运行。重启电脑后继续"
+
+      - order: 2
+        description: "安装Ubuntu 22.04"
+        commands:
+          - "wsl --install -d Ubuntu-22.04"
+        notes: "首次运行需创建用户名和密码"
+
+      - order: 3
+        description: "进入WSL2环境"
+        commands:
+          - "wsl"
+        notes: "后续步骤在WSL2 Ubuntu环境中执行"
+
+      - order: 4
+        description: "在WSL2中安装Python 3.11"
+        commands:
+          - "sudo apt update"
+          - "sudo apt install python3.11 python3.11-dev python3.11-venv"
+        notes: null
+
+      - order: 5
+        description: "安装uv包管理工具"
+        commands:
+          - "curl -LsSf https://astral.sh/uv/install.sh | sh"
+          - "source $HOME/.cargo/env"
+        notes: null
+
+      - order: 6
+        description: "克隆项目（在WSL2文件系统中）"
+        commands:
+          - "cd ~"
+          - "git clone https://github.com/yourusername/py_ai_tutorial.git"
+          - "cd py_ai_tutorial"
+          - "uv venv --python 3.11"
+          - "source .venv/bin/activate"
+        notes: "避免在/mnt/c下操作（性能差），使用~/projects"
+
+      - order: 7
+        description: "安装项目依赖"
+        commands:
+          - 'uv pip install -e ".[stage3]"'
+        notes: null
+
+    common_issues:
+      - symptom: "WSL2安装失败，提示虚拟化未启用"
+        cause: "BIOS中未启用虚拟化"
+        solution: "重启进入BIOS，启用Intel VT-x或AMD-V"
+
+      - symptom: "文件操作非常慢"
+        cause: "项目在Windows文件系统（/mnt/c）中"
+        solution: "将项目移到WSL2文件系统（~目录）"
+
+      - symptom: "无法访问localhost:8888（Jupyter）"
+        cause: "Windows防火墙阻止"
+        solution: "在Windows浏览器中访问，WSL2自动端口转发"
+
+    verification_script: "scripts/env/verify-wsl2.sh"
+    doc_path: "docs/cross-platform/setup-windows-wsl2.md"
+
+  # ========== Windows (Native) ==========
+  - id: "env-windows-native"
+    name: "Windows Native (原生)"
+    name_en: "Windows Native"
+    os_type: "windows"
+    os_variant: "Windows 10/11 原生环境"
+
+    hardware:
+      cpu_arch: "x86_64"
+      gpu_available: false
+      gpu_type: null
+      min_ram_gb: 8
+
+    python_version: ">=3.9,<3.13"
+    recommended_python: "3.11"
+
+    installation_steps:
+      - order: 1
+        description: "下载并安装Python 3.11"
+        commands:
+          - "# 访问 https://www.python.org/downloads/windows/"
+          - "# 下载Python 3.11 Windows installer"
+          - "# 安装时勾选 'Add Python to PATH'"
+        notes: "务必勾选Add Python to PATH选项"
+
+      - order: 2
+        description: "验证Python安装"
+        commands:
+          - "python --version"
+        notes: "在PowerShell或CMD中运行"
+
+      - order: 3
+        description: "安装uv包管理工具"
+        commands:
+          - "python -m pip install pipx"
+          - "pipx install uv"
+        notes: "若pipx不可用，使用: pip install --user uv"
+
+      - order: 4
+        description: "克隆项目"
+        commands:
+          - "git clone https://github.com/yourusername/py_ai_tutorial.git"
+          - "cd py_ai_tutorial"
+        notes: "需先安装Git for Windows"
+
+      - order: 5
+        description: "创建虚拟环境"
+        commands:
+          - "uv venv --python 3.11"
+          - ".venv\\Scripts\\Activate.ps1"
+        notes: "PowerShell中运行。CMD中使用.venv\\Scripts\\activate.bat"
+
+      - order: 6
+        description: "安装项目依赖"
+        commands:
+          - 'uv pip install -e ".[stage3]"'
+        notes: "首次安装可能需要10-15分钟"
+
+    common_issues:
+      - symptom: "Python命令无法识别"
+        cause: "未添加到PATH"
+        solution: "重新安装Python，勾选Add Python to PATH"
+
+      - symptom: "路径中的反斜杠报错"
+        cause: "Python字符串转义问题"
+        solution: "使用原始字符串 r'path\\to\\file' 或正斜杠 'path/to/file'"
+
+      - symptom: "某些包安装失败，需要C++编译器"
+        cause: "缺少Visual Studio Build Tools"
+        solution: "安装Visual Studio 2019/2022 Build Tools"
+
+      - symptom: "编码错误 UnicodeDecodeError"
+        cause: "Windows默认GBK编码"
+        solution: "在PowerShell中运行: chcp 65001 切换到UTF-8"
+
+    verification_script: "scripts/env/verify-windows.ps1"
+    doc_path: "docs/cross-platform/setup-windows-native.md"

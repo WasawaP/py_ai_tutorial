@@ -226,9 +226,9 @@ df -h .
 
 如需获取离线数据包或遇到问题，请通过以下方式联系：
 
-- **GitHub Issues**: [提交问题](https://github.com/yourusername/py_ai_tutorial/issues)
+- **GitHub Issues**: [提交问题](https://github.com/shychee/py_ai_tutorial/issues)
 - **邮件**: tutorial@example.com
-- **社区**: [讨论区](https://github.com/yourusername/py_ai_tutorial/discussions)
+- **社区**: [讨论区](https://github.com/shychee/py_ai_tutorial/discussions)
 
 ---
 

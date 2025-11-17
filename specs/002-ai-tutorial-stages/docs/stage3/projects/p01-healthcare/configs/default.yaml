@@ -1,0 +1,147 @@
+# P01 Healthcare Data Analysis Configuration
+# 医院销售数据分析配置文件
+
+# Data paths
+data:
+  input_file: "data/stage3/hospital_sales.csv"
+  output_dir: "docs/stage3/projects/p01-healthcare/outputs"
+  processed_data_dir: "docs/stage3/projects/p01-healthcare/outputs/processed_data"
+  
+# Data loading
+loading:
+  encoding: "utf-8"
+  parse_dates: ["order_date", "expiry_date"]
+  dtype:
+    order_id: str
+    product_name: str
+    category: str
+    customer_type: str
+    
+# Data cleaning
+cleaning:
+  # Missing value handling
+  missing_values:
+    notes: "无备注"  # Fill notes with default value
+    drop_columns: []  # Columns to drop if missing
+    drop_rows_if_missing: ["product_name", "total_amount", "order_date"]
+  
+  # Duplicate handling
+  duplicates:
+    subset: ["order_id"]
+    keep: "first"
+  
+  # Outlier detection (IQR method)
+  outliers:
+    enabled: true
+    columns: ["unit_price", "quantity", "total_amount"]
+    iqr_multiplier: 1.5  # Standard IQR multiplier
+    action: "flag"  # Options: "flag", "remove", "cap"
+
+# Analysis parameters
+analysis:
+  # Date range (null means use all data)
+  date_range:
+    start: null  # e.g., "2022-01-01"
+    end: null    # e.g., "2024-12-31"
+  
+  # Top N products/categories
+  top_n: 10
+  
+  # Aggregation levels
+  time_aggregations:
+    - "daily"
+    - "monthly"
+    - "quarterly"
+    - "yearly"
+  
+  # Group by dimensions
+  dimensions:
+    - "category"
+    - "customer_type"
+    - "department"
+    - "region"
+
+# Visualization
+visualization:
+  # Figure settings
+  figure:
+    dpi: 300
+    format: "png"  # Options: "png", "jpg", "pdf", "svg"
+    figsize_default: [12, 6]
+    style: "seaborn-v0_8"  # Matplotlib style
+  
+  # Fonts
+  fonts:
+    family: ["SimHei", "Arial Unicode MS", "DejaVu Sans"]
+    size: 12
+    title_size: 16
+    label_size: 14
+  
+  # Colors
+  colors:
+    palette: "Set2"  # Seaborn color palette
+    cmap: "YlOrRd"   # Heatmap colormap
+  
+  # Chart types to generate
+  charts:
+    - name: "monthly_trend"
+      type: "line"
+      title: "月度销售趋势"
+      enabled: true
+    
+    - name: "category_pie"
+      type: "pie"
+      title: "各类别销售额占比"
+      enabled: true
+    
+    - name: "top10_products"
+      type: "barh"
+      title: "销售额TOP10药品"
+      enabled: true
+    
+    - name: "heatmap"
+      type: "heatmap"
+      title: "月度-类别销售热力图"
+      enabled: true
+    
+    - name: "customer_type_bar"
+      type: "bar"
+      title: "客户类型销售对比"
+      enabled: true
+    
+    - name: "quarterly_boxplot"
+      type: "boxplot"
+      title: "季度销售额分布"
+      enabled: true
+
+# Report generation
+report:
+  format: "markdown"  # Options: "markdown", "html", "pdf"
+  template: null  # Custom template path (null = use default)
+  include_sections:
+    - "overview"
+    - "data_quality"
+    - "key_metrics"
+    - "trends"
+    - "recommendations"
+  
+  # Metrics to include
+  metrics:
+    - "total_sales"
+    - "total_orders"
+    - "average_order_value"
+    - "growth_rate"
+    - "top_categories"
+    - "top_products"
+
+# Logging
+logging:
+  level: "INFO"  # Options: "DEBUG", "INFO", "WARNING", "ERROR"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "docs/stage3/projects/p01-healthcare/outputs/analysis.log"
+
+# Performance
+performance:
+  chunk_size: 50000  # For large files
+  use_multiprocessing: false
+  n_jobs: -1  # Number of parallel jobs (-1 = all cores)

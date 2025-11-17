@@ -1,0 +1,79 @@
+# P03 银行营销分类配置文件
+
+data:
+  # 数据路径
+  input_file: "data/stage3/bank_marketing.csv"
+
+  # 输出目录
+  output_dir: "docs/stage3/projects/p03-bank-marketing/outputs"
+
+  # 训练测试集划分比例
+  test_size: 0.2
+
+  # 随机种子
+  random_state: 42
+
+preprocessing:
+  # 移除duration特征(数据泄漏风险)
+  remove_duration: true
+
+  # 数值特征标准化
+  scale_numeric: true
+
+  # 类别特征编码方式
+  categorical_encoding: "onehot"  # onehot 或 label
+
+  # 处理类别不平衡
+  handle_imbalance: true
+  class_weight: "balanced"  # balanced 或 null
+
+models:
+  # 逻辑回归配置
+  logistic_regression:
+    enabled: true
+    max_iter: 1000
+    solver: "lbfgs"
+    C: 1.0  # 正则化强度(越小正则化越强)
+
+  # 决策树配置
+  decision_tree:
+    enabled: true
+    max_depth: 10  # 最大深度(防止过拟合)
+    min_samples_split: 20  # 节点分裂最小样本数
+    min_samples_leaf: 10   # 叶节点最小样本数
+    criterion: "gini"  # gini 或 entropy
+
+evaluation:
+  # 评估指标
+  metrics:
+    - accuracy
+    - precision
+    - recall
+    - f1
+    - roc_auc
+
+  # 决策阈值
+  threshold: 0.5
+
+  # 交叉验证折数
+  cv_folds: 5
+
+visualization:
+  # 图表配置
+  dpi: 300
+  figsize: [10, 8]
+
+  # 中文字体
+  font_family: "Arial Unicode MS"  # macOS
+  # font_family: "SimHei"  # Windows/Linux
+
+  # 图表类型
+  plots:
+    - confusion_matrix
+    - roc_curve
+    - feature_importance
+    - correlation_heatmap
+
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(levelname)s - %(message)s"

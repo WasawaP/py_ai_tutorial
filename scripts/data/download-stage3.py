@@ -1,272 +1,264 @@
 #!/usr/bin/env python3
 """
-阶段3数据下载脚本 (Stage 3 Data Download Script)
-
-下载阶段3（机器学习与数据挖掘）所需的9个数据集。
+Stage 3 Dataset Download Script
+下载阶段3的9个项目数据集并自动校验
 
 Usage:
-    python scripts/data/download-stage3.py
-    python scripts/data/download-stage3.py --dataset DS-S3-P01-HOSPITAL
-    python scripts/data/download-stage3.py --verify-only
+    python scripts/data/download-stage3.py [--mirror] [--verify-only]
+
+Options:
+    --mirror       使用国内镜像加速下载
+    --verify-only  仅校验已下载的数据，不重新下载
+    --dataset ID   仅下载指定数据集 (如: DS-S3-P01-HOSPITAL)
 """
 
 import argparse
 import hashlib
+import os
 import sys
 from pathlib import Path
 from typing import Dict, List, Optional
-from urllib.parse import urlparse
+import urllib.request
+import urllib.error
 import yaml
 
-# 添加项目根目录到Python路径
+# 项目根目录
 PROJECT_ROOT = Path(__file__).parent.parent.parent
-sys.path.insert(0, str(PROJECT_ROOT))
+DATA_DIR = PROJECT_ROOT / "data" / "stage3"
+CONFIG_FILE = PROJECT_ROOT / "configs" / "content" / "datasets.yaml"
 
 
-class DatasetDownloader:
-    """数据集下载器"""
+class Colors:
+    """Terminal colors for better output"""
+    GREEN = "\033[92m"
+    YELLOW = "\033[93m"
+    RED = "\033[91m"
+    BLUE = "\033[94m"
+    ENDC = "\033[0m"
+    BOLD = "\033[1m"
 
-    def __init__(self, data_dir: Path, config_path: Path):
-        self.data_dir = data_dir
-        self.config_path = config_path
-        self.datasets_config: List[Dict] = []
 
-    def load_config(self):
-        """加载数据集配置"""
-        with open(self.config_path, "r", encoding="utf-8") as f:
-            config = yaml.safe_load(f)
-            self.datasets_config = [
-                ds for ds in config.get("datasets", [])
-                if ds["stage_id"] == "stage3"
-            ]
+def load_datasets() -> List[Dict]:
+    """Load dataset configurations from YAML"""
+    if not CONFIG_FILE.exists():
+        print(f"{Colors.RED}✗ Error: Config file not found: {CONFIG_FILE}{Colors.ENDC}")
+        sys.exit(1)
+    
+    with open(CONFIG_FILE, 'r', encoding='utf-8') as f:
+        config = yaml.safe_load(f)
+    
+    # Filter only Stage 3 datasets
+    stage3_datasets = [
+        ds for ds in config.get('datasets', [])
+        if ds.get('stage_id') == 'stage3'
+    ]
+    
+    return stage3_datasets
 
-    def calculate_checksum(self, file_path: Path) -> str:
-        """计算文件SHA256校验和"""
-        sha256_hash = hashlib.sha256()
-        with open(file_path, "rb") as f:
-            for byte_block in iter(lambda: f.read(4096), b""):
-                sha256_hash.update(byte_block)
-        return sha256_hash.hexdigest()
 
-    def verify_file(self, file_path: Path, expected_checksum: str) -> bool:
-        """验证文件完整性"""
-        if not file_path.exists():
-            return False
+def calculate_sha256(file_path: Path, chunk_size: int = 8192) -> str:
+    """Calculate SHA256 checksum of a file"""
+    sha256 = hashlib.sha256()
+    
+    with open(file_path, 'rb') as f:
+        while chunk := f.read(chunk_size):
+            sha256.update(chunk)
+    
+    return sha256.hexdigest()
 
-        if expected_checksum == "PLACEHOLDER_CHECKSUM_TO_BE_GENERATED":
-            print(f"   ⚠️  校验和未设置，跳过验证: {file_path.name}")
-            return True
 
-        actual_checksum = self.calculate_checksum(file_path)
-        return actual_checksum == expected_checksum
+def verify_checksum(file_path: Path, expected_checksum: str) -> bool:
+    """Verify file checksum"""
+    if not file_path.exists():
+        return False
+    
+    actual_checksum = calculate_sha256(file_path)
+    return actual_checksum == expected_checksum
 
-    def download_file(self, url: str, dest_path: Path) -> bool:
-        """下载文件（使用urllib）"""
-        try:
-            import urllib.request
-            print(f"   📥 下载中: {url}")
-            print(f"   ⬇️  保存到: {dest_path}")
 
-            # 创建目标目录
-            dest_path.parent.mkdir(parents=True, exist_ok=True)
-
-            # 下载文件
-            urllib.request.urlretrieve(url, dest_path)
-            print(f"   ✅ 下载完成: {dest_path.name}")
-            return True
-
-        except Exception as e:
-            print(f"   ❌ 下载失败: {e}")
-            return False
-
-    def download_dataset(self, dataset_id: str) -> bool:
-        """下载单个数据集"""
-        # 查找数据集配置
-        dataset_config = None
-        for ds in self.datasets_config:
-            if ds["id"] == dataset_id:
-                dataset_config = ds
-                break
-
-        if not dataset_config:
-            print(f"❌ 未找到数据集: {dataset_id}")
-            return False
-
-        print(f"\n📦 数据集: {dataset_config['name']} ({dataset_id})")
-        print(f"   项目: {dataset_config['project_id']}")
-        print(f"   描述: {dataset_config['description'][:60]}...")
-
-        # 下载文件
-        for file_info in dataset_config["files"]:
-            filename = file_info["filename"]
-            file_path = self.data_dir / "stage3" / filename
-            expected_checksum = file_info["checksum_sha256"]
-
-            # 检查文件是否已存在且完整
-            if file_path.exists():
-                print(f"   📄 文件已存在: {filename}")
-                if self.verify_file(file_path, expected_checksum):
-                    print(f"   ✅ 校验通过，跳过下载")
-                    continue
-                else:
-                    print(f"   ⚠️  校验失败，重新下载")
-
-            # 下载文件
-            download_url = dataset_config["source"]["url"]
-
-            # 注意：实际实现时，这里需要真实的下载URL
-            # 目前使用placeholder标记需要手动处理
-            if "github.com" in download_url or "releases/download" in download_url:
-                success = self.download_file(download_url, file_path)
-                if not success:
-                    # 尝试镜像URL
-                    mirror_url = dataset_config["source"].get("mirror_url")
-                    if mirror_url:
-                        print(f"   🔄 尝试镜像地址...")
-                        success = self.download_file(mirror_url, file_path)
-
-                if success and expected_checksum != "PLACEHOLDER_CHECKSUM_TO_BE_GENERATED":
-                    # 验证下载的文件
-                    if self.verify_file(file_path, expected_checksum):
-                        print(f"   ✅ 文件验证通过")
-                    else:
-                        print(f"   ❌ 文件验证失败，校验和不匹配")
-                        return False
-            else:
-                print(f"   ⚠️  数据集尚未发布，请访问: {download_url}")
-                print(f"   💡 提示: 数据集将在教程正式发布时提供下载链接")
-                # 创建占位符文件（用于开发测试）
-                self._create_placeholder_file(file_path, file_info)
-                return True
-
+def download_file(url: str, dest_path: Path, desc: str = "") -> bool:
+    """Download a file with progress indicator"""
+    try:
+        print(f"{Colors.BLUE}→ Downloading: {desc or url}{Colors.ENDC}")
+        print(f"  URL: {url}")
+        print(f"  Destination: {dest_path}")
+        
+        # Create parent directory
+        dest_path.parent.mkdir(parents=True, exist_ok=True)
+        
+        # Download file
+        def reporthook(count, block_size, total_size):
+            if total_size > 0:
+                percent = count * block_size * 100 / total_size
+                size_mb = total_size / (1024 * 1024)
+                downloaded_mb = count * block_size / (1024 * 1024)
+                sys.stdout.write(f"\r  Progress: {downloaded_mb:.1f}/{size_mb:.1f} MB ({percent:.1f}%)")
+                sys.stdout.flush()
+        
+        urllib.request.urlretrieve(url, dest_path, reporthook)
+        print()  # New line after progress
         return True
+        
+    except urllib.error.URLError as e:
+        print(f"\n{Colors.RED}✗ Download failed: {e}{Colors.ENDC}")
+        return False
+    except Exception as e:
+        print(f"\n{Colors.RED}✗ Unexpected error: {e}{Colors.ENDC}")
+        return False
 
-    def _create_placeholder_file(self, file_path: Path, file_info: Dict):
-        """创建占位符CSV文件（用于开发测试）"""
-        file_path.parent.mkdir(parents=True, exist_ok=True)
 
-        # 简单CSV占位符
-        with open(file_path, "w", encoding="utf-8") as f:
-            f.write("# 占位符数据文件\n")
-            f.write(f"# 文件名: {file_info['filename']}\n")
-            f.write(f"# 大小: {file_info['size_mb']}MB\n")
-            f.write(f"# 行数: {file_info['rows']}\n")
-            f.write(f"# 列数: {file_info['columns']}\n")
-            f.write("# 此文件为占位符，实际数据将在教程发布时提供\n")
-
-        print(f"   📝 创建占位符文件: {file_path}")
-
-    def download_all(self) -> bool:
-        """下载所有阶段3数据集"""
-        print("=" * 60)
-        print("📚 阶段3数据下载 (Stage 3 Data Download)")
-        print("=" * 60)
-        print(f"数据目录: {self.data_dir}/stage3")
-        print(f"数据集数量: {len(self.datasets_config)}")
-        print()
-
-        success_count = 0
-        for dataset in self.datasets_config:
-            if self.download_dataset(dataset["id"]):
-                success_count += 1
-
-        print("\n" + "=" * 60)
-        print(f"✅ 下载完成: {success_count}/{len(self.datasets_config)} 个数据集")
-        print("=" * 60)
-
-        return success_count == len(self.datasets_config)
-
-    def verify_all(self) -> bool:
-        """验证所有已下载的数据集"""
-        print("=" * 60)
-        print("🔍 数据验证 (Data Verification)")
-        print("=" * 60)
-        print()
-
-        verified_count = 0
-        missing_count = 0
-
-        for dataset in self.datasets_config:
-            dataset_id = dataset["id"]
-            print(f"📦 {dataset['name']} ({dataset_id})")
-
-            for file_info in dataset["files"]:
-                filename = file_info["filename"]
-                file_path = self.data_dir / "stage3" / filename
-                expected_checksum = file_info["checksum_sha256"]
-
-                if not file_path.exists():
-                    print(f"   ❌ 文件缺失: {filename}")
-                    missing_count += 1
-                elif self.verify_file(file_path, expected_checksum):
-                    print(f"   ✅ 文件完整: {filename}")
-                    verified_count += 1
+def process_dataset(dataset: Dict, use_mirror: bool = False, verify_only: bool = False) -> bool:
+    """Process a single dataset (download and verify)"""
+    ds_id = dataset['id']
+    ds_name = dataset['name']
+    
+    print(f"\n{Colors.BOLD}{'='*60}{Colors.ENDC}")
+    print(f"{Colors.BOLD}Dataset: {ds_name} ({ds_id}){Colors.ENDC}")
+    print(f"{Colors.BOLD}{'='*60}{Colors.ENDC}")
+    
+    # Get file info
+    files = dataset.get('files', [])
+    if not files:
+        print(f"{Colors.YELLOW}⚠ Warning: No files defined for this dataset{Colors.ENDC}")
+        return True
+    
+    source = dataset.get('source', {})
+    source_type = source.get('type')
+    
+    # Handle different source types
+    if source_type == 'synthetic':
+        print(f"{Colors.BLUE}ℹ Source: Synthetic data (needs to be generated){Colors.ENDC}")
+        print(f"{Colors.YELLOW}⚠ This dataset is not yet available for automatic download{Colors.ENDC}")
+        return True
+    
+    elif source_type == 'public':
+        base_url = source.get('mirror_url') if use_mirror else source.get('url')
+        if not base_url:
+            print(f"{Colors.YELLOW}⚠ No download URL available{Colors.ENDC}")
+            return True
+    
+    else:
+        print(f"{Colors.YELLOW}⚠ Source type '{source_type}' not supported for automatic download{Colors.ENDC}")
+        return True
+    
+    success = True
+    for file_info in files:
+        filename = file_info['filename']
+        expected_checksum = file_info.get('checksum_sha256', '').replace('PLACEHOLDER_CHECKSUM_TO_BE_GENERATED', '')
+        size_mb = file_info.get('size_mb', 0)
+        
+        dest_path = DATA_DIR / filename
+        
+        # Check if file exists and verify
+        if dest_path.exists():
+            print(f"\n{Colors.BLUE}✓ File exists: {filename}{Colors.ENDC}")
+            
+            if expected_checksum:
+                print(f"  Verifying checksum...")
+                if verify_checksum(dest_path, expected_checksum):
+                    print(f"  {Colors.GREEN}✓ Checksum verified{Colors.ENDC}")
                 else:
-                    print(f"   ❌ 校验失败: {filename}")
-
-        print("\n" + "=" * 60)
-        print(f"验证结果: {verified_count} 个文件完整, {missing_count} 个文件缺失")
-        print("=" * 60)
-
-        return missing_count == 0
+                    print(f"  {Colors.RED}✗ Checksum mismatch!{Colors.ENDC}")
+                    if not verify_only:
+                        print(f"  Re-downloading...")
+                        dest_path.unlink()
+                    else:
+                        success = False
+                        continue
+            else:
+                print(f"  {Colors.YELLOW}⚠ No checksum available (placeholder){Colors.ENDC}")
+        
+        # Download if not exists or checksum failed
+        if not dest_path.exists() and not verify_only:
+            # Construct download URL
+            if source_type == 'public':
+                # For public datasets, URL might be a base or direct link
+                download_url = base_url if base_url.endswith(filename) else f"{base_url}/{filename}"
+            else:
+                print(f"{Colors.YELLOW}⚠ Cannot construct download URL{Colors.ENDC}")
+                continue
+            
+            # Download
+            desc = f"{ds_name} - {filename} ({size_mb}MB)"
+            if not download_file(download_url, dest_path, desc):
+                success = False
+                continue
+            
+            # Verify after download
+            if expected_checksum:
+                print(f"  Verifying downloaded file...")
+                if verify_checksum(dest_path, expected_checksum):
+                    print(f"  {Colors.GREEN}✓ Download verified{Colors.ENDC}")
+                else:
+                    print(f"  {Colors.RED}✗ Downloaded file checksum mismatch!{Colors.ENDC}")
+                    success = False
+        
+        elif verify_only and not dest_path.exists():
+            print(f"{Colors.RED}✗ File not found: {filename}{Colors.ENDC}")
+            success = False
+    
+    return success
 
 
 def main():
-    parser = argparse.ArgumentParser(
-        description="下载阶段3（机器学习与数据挖掘）数据集"
-    )
-    parser.add_argument(
-        "--dataset",
-        type=str,
-        help="指定下载单个数据集（例如: DS-S3-P01-HOSPITAL）",
-    )
-    parser.add_argument(
-        "--verify-only",
-        action="store_true",
-        help="仅验证已下载的数据集，不下载",
-    )
-    parser.add_argument(
-        "--data-dir",
-        type=Path,
-        default=PROJECT_ROOT / "data",
-        help="数据存储目录（默认: ./data）",
-    )
-    parser.add_argument(
-        "--config",
-        type=Path,
-        default=PROJECT_ROOT / "configs" / "content" / "datasets.yaml",
-        help="数据集配置文件路径",
-    )
+    parser = argparse.ArgumentParser(description='Download Stage 3 datasets')
+    parser.add_argument('--mirror', action='store_true', help='Use mirror URLs (faster in China)')
+    parser.add_argument('--verify-only', action='store_true', help='Verify existing files without downloading')
+    parser.add_argument('--dataset', type=str, help='Download specific dataset by ID')
+    
     args = parser.parse_args()
-
-    # 初始化下载器
-    downloader = DatasetDownloader(
-        data_dir=args.data_dir,
-        config_path=args.config,
-    )
-
-    # 加载配置
-    if not args.config.exists():
-        print(f"❌ 配置文件不存在: {args.config}")
-        sys.exit(1)
-
-    downloader.load_config()
-
-    # 验证模式
-    if args.verify_only:
-        success = downloader.verify_all()
-        sys.exit(0 if success else 1)
-
-    # 下载模式
+    
+    print(f"{Colors.BOLD}{'='*60}{Colors.ENDC}")
+    print(f"{Colors.BOLD}Stage 3 Dataset Download & Verification Tool{Colors.ENDC}")
+    print(f"{Colors.BOLD}{'='*60}{Colors.ENDC}")
+    print(f"Data directory: {DATA_DIR}")
+    print(f"Mirror mode: {'Enabled' if args.mirror else 'Disabled'}")
+    print(f"Verify only: {'Yes' if args.verify_only else 'No'}")
+    
+    # Load datasets
+    datasets = load_datasets()
+    print(f"\nFound {len(datasets)} Stage 3 datasets in configuration")
+    
+    # Filter by specific dataset if requested
     if args.dataset:
-        # 下载单个数据集
-        success = downloader.download_dataset(args.dataset)
-        sys.exit(0 if success else 1)
+        datasets = [ds for ds in datasets if ds['id'] == args.dataset]
+        if not datasets:
+            print(f"{Colors.RED}✗ Dataset not found: {args.dataset}{Colors.ENDC}")
+            sys.exit(1)
+        print(f"Processing only: {args.dataset}")
+    
+    # Ensure data directory exists
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    
+    # Process each dataset
+    success_count = 0
+    failed_datasets = []
+    
+    for dataset in datasets:
+        try:
+            if process_dataset(dataset, args.mirror, args.verify_only):
+                success_count += 1
+            else:
+                failed_datasets.append(dataset['id'])
+        except Exception as e:
+            print(f"{Colors.RED}✗ Error processing {dataset['id']}: {e}{Colors.ENDC}")
+            failed_datasets.append(dataset['id'])
+    
+    # Summary
+    print(f"\n{Colors.BOLD}{'='*60}{Colors.ENDC}")
+    print(f"{Colors.BOLD}Summary{Colors.ENDC}")
+    print(f"{Colors.BOLD}{'='*60}{Colors.ENDC}")
+    print(f"Total datasets: {len(datasets)}")
+    print(f"{Colors.GREEN}Successful: {success_count}{Colors.ENDC}")
+    
+    if failed_datasets:
+        print(f"{Colors.RED}Failed: {len(failed_datasets)}{Colors.ENDC}")
+        print(f"Failed datasets: {', '.join(failed_datasets)}")
+        sys.exit(1)
     else:
-        # 下载所有数据集
-        success = downloader.download_all()
-        sys.exit(0 if success else 1)
+        print(f"\n{Colors.GREEN}✓ All datasets processed successfully!{Colors.ENDC}")
+        sys.exit(0)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

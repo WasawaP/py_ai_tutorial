@@ -2,7 +2,7 @@
 
 [![Python Version](https://img.shields.io/badge/python-3.9%2B-blue)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
-[![Documentation](https://img.shields.io/badge/docs-MkDocs-blue)](https://yourusername.github.io/py_ai_tutorial/)
+[![Documentation](https://img.shields.io/badge/docs-MkDocs-blue)](https://shychee.github.io/py_ai_tutorial/)
 
 > 为具备 3-5 年 Python 后端经验的工程师打造的 AI 学习路径，从传统机器学习到生成式 AI 的渐进式教程体系。
 
@@ -42,7 +42,7 @@
 #### 1. 克隆项目
 
 ```bash
-git clone https://github.com/yourusername/py_ai_tutorial.git
+git clone https://github.com/shychee/py_ai_tutorial.git
 cd py_ai_tutorial
 ```
 
@@ -325,9 +325,9 @@ mkdocs build
 
 ## 📧 联系方式
 
-- **GitHub Issues**: [提交问题](https://github.com/yourusername/py_ai_tutorial/issues)
+- **GitHub Issues**: [提交问题](https://github.com/shychee/py_ai_tutorial/issues)
 - **邮件**: tutorial@example.com
-- **文档**: [在线文档](https://yourusername.github.io/py_ai_tutorial/)
+- **文档**: [在线文档](https://shychee.github.io/py_ai_tutorial/)
 
 ---
 

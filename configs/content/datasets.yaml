@@ -19,15 +19,15 @@ datasets:
 
     source:
       type: "synthetic"  # 合成数据（基于真实场景）
-      url: "https://github.com/yourusername/py_ai_tutorial/releases/download/v1.0.0/hospital_sales.csv"
-      mirror_url: "https://mirror.example.com/datasets/stage3/hospital_sales.csv"
+      url: "generated"  # 本地生成
+      mirror_url: null
       license: "MIT"
 
     files:
       - filename: "hospital_sales.csv"
-        size_mb: 52
-        rows: 500000
-        checksum_sha256: "PLACEHOLDER_CHECKSUM_TO_BE_GENERATED"
+        size_mb: 0.17
+        rows: 1000
+        checksum_sha256: "61711fbd574dfd7b4260dbcb3ffe1059b22196f8b0f5544d065ce33196ee5030"
         columns: 18
         format: "CSV"
 
@@ -89,15 +89,15 @@ datasets:
 
     source:
       type: "synthetic"
-      url: "https://github.com/yourusername/py_ai_tutorial/releases/download/v1.0.0/clothing_retail.csv"
-      mirror_url: "https://mirror.example.com/datasets/stage3/clothing_retail.csv"
+      url: "generated"  # 本地生成
+      mirror_url: null
       license: "MIT"
 
     files:
       - filename: "clothing_retail.csv"
-        size_mb: 105
-        rows: 1000000
-        checksum_sha256: "PLACEHOLDER_CHECKSUM_TO_BE_GENERATED"
+        size_mb: 0.30
+        rows: 2000
+        checksum_sha256: "c8808e5c5731654ccdd64b8df343d92e9677bcc8830bb5bbda3af6293e5ecefb"
         columns: 22
         format: "CSV"
 
@@ -147,16 +147,16 @@ datasets:
 
     source:
       type: "public"  # 公开数据集（UCI ML Repository）
-      url: "https://archive.ics.uci.edu/ml/datasets/Bank+Marketing"
-      mirror_url: "https://mirror.example.com/datasets/stage3/bank_marketing.csv"
+      url: "https://archive.ics.uci.edu/ml/machine-learning-databases/00222/bank.zip"
+      mirror_url: null
       license: "CC BY 4.0"
       citation: "Moro et al., 2014. A Data-Driven Approach to Predict the Success of Bank Telemarketing."
 
     files:
       - filename: "bank_marketing.csv"
-        size_mb: 210
+        size_mb: 3.53
         rows: 45211
-        checksum_sha256: "PLACEHOLDER_CHECKSUM_TO_BE_GENERATED"
+        checksum_sha256: "b44507c26634736d4a0619ec2d7c4b6ff56a2c63cbeb5176d3134e7b25e416f0"
         columns: 17
         format: "CSV"
 

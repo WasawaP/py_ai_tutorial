@@ -98,15 +98,15 @@ Phase 2 (Foundation) ← 阻塞所有User Stories
 
 ### 任务清单
 
-- [ ] T001 创建项目根目录结构（docs/, notebooks/, scripts/, data/, templates/, tests/, site/, configs/）
-- [ ] T002 配置pyproject.toml（项目元数据、阶段3/4/5依赖分组、uv配置、工具配置）
-- [ ] T003 创建.python-version文件（锁定Python 3.11）
-- [ ] T004 [P] 创建.gitignore文件（排除.venv/, outputs/, data/cache/, *.pyc等）
-- [ ] T005 [P] 配置MkDocs（mkdocs.yml，Material主题，中文搜索，导航结构）
-- [ ] T006 [P] 编写项目总览README.md（项目简介、快速开始、目录结构、贡献指南）
-- [ ] T007 配置CI/CD基础（.github/workflows/ci.yml，运行验证脚本与测试）
-- [ ] T008 [P] 创建离线数据包目录结构（offline/stage3-data/, offline/stage4-data/, offline/stage5-data/）
-- [ ] T009 初始化Git仓库并创建首次提交
+- [X] T001 创建项目根目录结构（docs/, notebooks/, scripts/, data/, templates/, tests/, site/, configs/）
+- [X] T002 配置pyproject.toml（项目元数据、阶段3/4/5依赖分组、uv配置、工具配置）
+- [X] T003 创建.python-version文件（锁定Python 3.11）
+- [X] T004 [P] 创建.gitignore文件（排除.venv/, outputs/, data/cache/, *.pyc等）
+- [X] T005 [P] 配置MkDocs（mkdocs.yml，Material主题，中文搜索，导航结构）
+- [X] T006 [P] 编写项目总览README.md（项目简介、快速开始、目录结构、贡献指南）
+- [X] T007 配置CI/CD基础（.github/workflows/ci.yml，运行验证脚本与测试）
+- [X] T008 [P] 创建离线数据包目录结构（offline/stage3-data/, offline/stage4-data/, offline/stage5-data/）
+- [X] T009 初始化Git仓库并创建首次提交
 
 ---
 
@@ -118,38 +118,38 @@ Phase 2 (Foundation) ← 阻塞所有User Stories
 
 #### 数据模型配置（串行，T010-T013）
 
-- [ ] T010 创建configs/content/stages.yaml（定义stage3/4/5实体）
-- [ ] T011 创建configs/content/modules.yaml（定义所有模块实体）
-- [ ] T012 创建configs/content/projects.yaml（定义所有项目实体）
-- [ ] T013 创建configs/content/datasets.yaml（定义所有数据集实体）
+- [X] T010 创建configs/content/stages.yaml（定义stage3/4/5实体）
+- [X] T011 创建configs/content/modules.yaml（定义所有模块实体）
+- [X] T012 创建configs/content/projects.yaml（定义所有项目实体）
+- [X] T013 创建configs/content/datasets.yaml（定义所有数据集实体）
 
 #### 脚本与模板（可并行，T014-T021）
 
-- [ ] T014 [P] 实现环境检测脚本scripts/env/detect-platform.py（自动检测OS/CPU/GPU/Python版本）
-- [ ] T015 [P] 实现数据校验脚本scripts/data/verify.py（SHA256校验、完整性检查）
-- [ ] T016 [P] 创建项目模板templates/project-template/（README、pyproject.toml、src/、configs/、notebooks/、tests/）
-- [ ] T017 [P] 创建提交物模板templates/submission-template/（结构说明、评分checklist）
-- [ ] T018 [P] 实现数据模型验证脚本scripts/validation/validate-entities.py（YAML结构验证）
-- [ ] T019 [P] 实现数据模型路径验证scripts/validation/validate-paths.py（检查引用文件存在）
-- [ ] T020 [P] 实现数据模型关系验证scripts/validation/validate-relationships.py（检查实体引用完整性）
-- [ ] T021 [P] 创建configs/content/environments.yaml（定义6个OS环境画像）
+- [X] T014 [P] 实现环境检测脚本scripts/env/detect-platform.py（自动检测OS/CPU/GPU/Python版本）
+- [X] T015 [P] 实现数据校验脚本scripts/data/verify.py（SHA256校验、完整性检查）
+- [X] T016 [P] 创建项目模板templates/project-template/（README、pyproject.toml、src/、configs/、notebooks/、tests/）
+- [X] T017 [P] 创建提交物模板templates/submission-template/（结构说明、评分checklist）
+- [X] T018 [P] 实现数据模型验证脚本scripts/validation/validate-entities.py（YAML结构验证）
+- [X] T019 [P] 实现数据模型路径验证scripts/validation/validate-paths.py（检查引用文件存在）
+- [X] T020 [P] 实现数据模型关系验证scripts/validation/validate-relationships.py（检查实体引用完整性）
+- [X] T021 [P] 创建configs/content/environments.yaml（定义6个OS环境画像）
 
 #### 跨平台基础文档（可并行，T022-T028）
 
-- [ ] T022 [P] 编写docs/cross-platform/setup-macos-intel.md（Intel Mac环境配置）
-- [ ] T023 [P] 编写docs/cross-platform/setup-macos-arm64.md（Apple Silicon环境配置）
-- [ ] T024 [P] 编写docs/cross-platform/setup-linux.md（Ubuntu/CentOS环境配置）
-- [ ] T025 [P] 编写docs/cross-platform/setup-windows-native.md（Windows原生环境配置）
-- [ ] T026 [P] 编写docs/cross-platform/setup-windows-wsl2.md（WSL2环境配置）
-- [ ] T027 [P] 编写docs/cross-platform/setup-cloud-gpu.md（云端GPU最小上手路径）
-- [ ] T028 [P] 编写docs/cross-platform/troubleshooting.md（故障恢复清单，≥5条常见问题）
+- [X] T022 [P] 编写docs/cross-platform/setup-macos-intel.md（Intel Mac环境配置）
+- [X] T023 [P] 编写docs/cross-platform/setup-macos-arm64.md（Apple Silicon环境配置）
+- [X] T024 [P] 编写docs/cross-platform/setup-linux.md（Ubuntu/CentOS环境配置）
+- [X] T025 [P] 编写docs/cross-platform/setup-windows-native.md（Windows原生环境配置）
+- [X] T026 [P] 编写docs/cross-platform/setup-windows-wsl2.md（WSL2环境配置）
+- [X] T027 [P] 编写docs/cross-platform/setup-cloud-gpu.md（云端GPU最小上手路径）
+- [X] T028 [P] 编写docs/cross-platform/troubleshooting.md（故障恢复清单，≥5条常见问题）
 
 #### 辅助文档（可并行，T029-T032）
 
-- [ ] T029 [P] 编写docs/glossary.md（术语中英对照表，≥15条）
-- [ ] T030 [P] 编写docs/prerequisites.md（先修要求：Python/数学基础/外部资源链接）
-- [ ] T031 [P] 编写docs/learning-path.md（学习路线图、里程碑checklist、时间预估）
-- [ ] T032 [P] 编写docs/framework-comparison.md（PyTorch vs TensorFlow对比表）
+- [X] T029 [P] 编写docs/glossary.md（术语中英对照表，≥15条）
+- [X] T030 [P] 编写docs/prerequisites.md（先修要求：Python/数学基础/外部资源链接）
+- [X] T031 [P] 编写docs/learning-path.md（学习路线图、里程碑checklist、时间预估）
+- [X] T032 [P] 编写docs/framework-comparison.md（PyTorch vs TensorFlow对比表）
 
 ---
 
@@ -169,67 +169,67 @@ Phase 2 (Foundation) ← 阻塞所有User Stories
 
 #### 模块M01：科学计算库
 
-- [ ] T033 [P] [US1] 编写docs/stage3/01-scientific-computing/README.md（NumPy/Pandas/Matplotlib教程）
-- [ ] T034 [P] [US1] 创建notebooks/stage3/01-numpy-basics.ipynb（数组操作、统计函数示例）
-- [ ] T035 [P] [US1] 创建notebooks/stage3/02-pandas-intro.ipynb（Series/DataFrame、增删查改）
-- [ ] T036 [P] [US1] 创建notebooks/stage3/03-visualization.ipynb（Matplotlib基础绘图、Pandas可视化）
+- [X] T033 [P] [US1] 编写docs/stage3/01-scientific-computing/README.md（NumPy/Pandas/Matplotlib教程）
+- [X] T034 [P] [US1] 创建notebooks/stage3/01-numpy-basics.ipynb（数组操作、统计函数示例）
+- [X] T035 [P] [US1] 创建notebooks/stage3/02-pandas-intro.ipynb（Series/DataFrame、增删查改）
+- [X] T036 [P] [US1] 创建notebooks/stage3/03-visualization.ipynb（Matplotlib基础绘图、Pandas可视化）
 
 #### 模块M02：Pandas项目实战
 
-- [ ] T037 [P] [US1] 编写docs/stage3/02-pandas-practice/README.md（描述性分析、分组分析教程）
-- [ ] T038 [P] [US1] 创建notebooks/stage3/04-descriptive-analysis.ipynb（描述性统计、探索性分析）
-- [ ] T039 [P] [US1] 创建notebooks/stage3/05-data-preprocessing.ipynb（合并、清洗、标准化、正则）
+- [X] T037 [P] [US1] 编写docs/stage3/02-pandas-practice/README.md（描述性分析、分组分析教程）
+- [X] T038 [P] [US1] 创建notebooks/stage3/04-descriptive-analysis.ipynb（描述性统计、探索性分析）
+- [X] T039 [P] [US1] 创建notebooks/stage3/05-data-preprocessing.ipynb（合并、清洗、标准化、正则）
 
 #### 模块M03：AI数学基础
 
-- [ ] T040 [P] [US1] 编写docs/stage3/03-ml-basics/README.md（统计学基础、线性代数、概率论速览）
-- [ ] T041 [P] [US1] 创建notebooks/stage3/06-statistics-basics.ipynb（概率分布、中心极限定理、假设检验）
-- [ ] T042 [P] [US1] 创建notebooks/stage3/07-linear-algebra.ipynb（矩阵运算、特征值、PCA可视化）
+- [X] T040 [P] [US1] 编写docs/stage3/03-ml-basics/README.md（统计学基础、线性代数、概率论速览）
+- [X] T041 [P] [US1] 创建notebooks/stage3/06-statistics-basics.ipynb（概率分布、中心极限定理、假设检验）
+- [X] T042 [P] [US1] 创建notebooks/stage3/07-linear-algebra.ipynb（矩阵运算、特征值、PCA可视化）
 
 #### 模块M04：机器学习进阶
 
-- [ ] T043 [P] [US1] 编写docs/stage3/04-ml-advanced/README.md（回归、分类、聚类、集成学习教程）
-- [ ] T044 [P] [US1] 创建notebooks/stage3/08-ml-algorithms.ipynb（线性回归、逻辑回归、决策树、随机森林、XGBoost示例）
+- [X] T043 [P] [US1] 编写docs/stage3/04-ml-advanced/README.md（回归、分类、聚类、集成学习教程）
+- [X] T044 [P] [US1] 创建notebooks/stage3/08-ml-algorithms.ipynb（线性回归、逻辑回归、决策树、随机森林、XGBoost示例）
 
 ### 阶段3数据准备（串行，T045-T047）
 
-- [ ] T045 [US1] 实现scripts/data/download-stage3.py（下载9个项目数据集，自动校验）
-- [ ] T046 [US1] 创建data/stage3/README.md（数据集列表、大小、下载说明、校验指引）
-- [ ] T047 [US1] 打包离线数据offline/stage3-data.tar.gz（包含所有9个数据集与checksums.txt）
+- [X] T045 [US1] 实现scripts/data/download-stage3.py（下载9个项目数据集，自动校验）
+- [X] T046 [US1] 创建data/stage3/README.md（数据集列表、大小、下载说明、校验指引）
+- [X] T047 [US1] 打包离线数据offline/stage3-data.tar.gz（包含所有9个数据集与checksums.txt）
 
 ### 阶段3项目实现（并行组2，依赖T033-T044模块完成，T048-T074）
 
 #### 项目P01：朝阳医院指标搭建及销售数据汇总
 
-- [ ] T048 [P] [US1] 创建docs/stage3/projects/p01-healthcare/目录结构（基于project-template）
-- [ ] T049 [P] [US1] 编写docs/stage3/projects/p01-healthcare/README.md（项目背景、数据说明、评估指标、交付物）
-- [ ] T050 [P] [US1] 配置docs/stage3/projects/p01-healthcare/pyproject.toml（pandas/numpy/matplotlib依赖）
-- [ ] T051 [P] [US1] 实现docs/stage3/projects/p01-healthcare/src/analyze.py（数据清洗、指标计算、可视化）
-- [ ] T052 [P] [US1] 创建docs/stage3/projects/p01-healthcare/notebooks/analysis.ipynb（Notebook版本）
-- [ ] T053 [P] [US1] 配置docs/stage3/projects/p01-healthcare/configs/default.yaml（数据路径、输出路径）
+- [X] T048 [P] [US1] 创建docs/stage3/projects/p01-healthcare/目录结构（基于project-template）
+- [X] T049 [P] [US1] 编写docs/stage3/projects/p01-healthcare/README.md（项目背景、数据说明、评估指标、交付物）
+- [X] T050 [P] [US1] 配置docs/stage3/projects/p01-healthcare/pyproject.toml（pandas/numpy/matplotlib依赖）
+- [X] T051 [P] [US1] 实现docs/stage3/projects/p01-healthcare/src/analyze.py（数据清洗、指标计算、可视化）
+- [X] T052 [P] [US1] 创建docs/stage3/projects/p01-healthcare/notebooks/analysis.ipynb（Notebook版本）
+- [X] T053 [P] [US1] 配置docs/stage3/projects/p01-healthcare/configs/default.yaml（数据路径、输出路径）
 
 #### 项目P02：服装零售销售数据分析
 
-- [ ] T054 [P] [US1] 创建docs/stage3/projects/p02-ecommerce/目录结构
-- [ ] T055 [P] [US1] 编写docs/stage3/projects/p02-ecommerce/README.md
-- [ ] T056 [P] [US1] 配置docs/stage3/projects/p02-ecommerce/pyproject.toml
-- [ ] T057 [P] [US1] 实现docs/stage3/projects/p02-ecommerce/src/analyze.py（优衣库销售数据分析、4P分析法、目标顾客度配）
-- [ ] T058 [P] [US1] 创建docs/stage3/projects/p02-ecommerce/notebooks/analysis.ipynb
+- [X] T054 [P] [US1] 创建docs/stage3/projects/p02-ecommerce/目录结构
+- [X] T055 [P] [US1] 编写docs/stage3/projects/p02-ecommerce/README.md
+- [X] T056 [P] [US1] 配置docs/stage3/projects/p02-ecommerce/pyproject.toml
+- [X] T057 [P] [US1] 实现docs/stage3/projects/p02-ecommerce/src/analyze.py（优衣库销售数据分析、4P分析法、目标顾客度配）
+- [X] T058 [P] [US1] 创建docs/stage3/projects/p02-ecommerce/notebooks/analysis.ipynb
 
 #### 项目P03：银行电话营销活动分析
 
-- [ ] T059 [P] [US1] 创建docs/stage3/projects/p03-finance/目录结构
-- [ ] T060 [P] [US1] 编写docs/stage3/projects/p03-finance/README.md
-- [ ] T061 [P] [US1] 配置docs/stage3/projects/p03-finance/pyproject.toml（添加scikit-learn）
-- [ ] T062 [P] [US1] 实现docs/stage3/projects/p03-finance/src/train.py（逻辑回归、决策树分类）
-- [ ] T063 [P] [US1] 创建docs/stage3/projects/p03-finance/notebooks/classification.ipynb
+- [X] T059 [P] [US1] 创建docs/stage3/projects/p03-finance/目录结构
+- [X] T060 [P] [US1] 编写docs/stage3/projects/p03-finance/README.md
+- [X] T061 [P] [US1] 配置docs/stage3/projects/p03-finance/pyproject.toml（添加scikit-learn）
+- [X] T062 [P] [US1] 实现docs/stage3/projects/p03-finance/src/train.py（逻辑回归、决策树分类）
+- [X] T063 [P] [US1] 创建docs/stage3/projects/p03-finance/notebooks/classification.ipynb
 
 #### 项目P04：通讯公司客户响应速度提升
 
-- [ ] T064 [P] [US1] 创建docs/stage3/projects/p04-telecom/目录结构
-- [ ] T065 [P] [US1] 编写docs/stage3/projects/p04-telecom/README.md
-- [ ] T066 [P] [US1] 实现docs/stage3/projects/p04-telecom/src/analyze.py（RFM分析、客户细分）
-- [ ] T067 [P] [US1] 创建docs/stage3/projects/p04-telecom/notebooks/analysis.ipynb
+- [X] T064 [P] [US1] 创建docs/stage3/projects/p04-telecom/目录结构
+- [X] T065 [P] [US1] 编写docs/stage3/projects/p04-telecom/README.md
+- [X] T066 [P] [US1] 实现docs/stage3/projects/p04-telecom/src/analyze.py（RFM分析、客户细分）
+- [X] T067 [P] [US1] 创建docs/stage3/projects/p04-telecom/notebooks/analysis.ipynb
 
 #### 项目P05：零售超市经营分析
 
