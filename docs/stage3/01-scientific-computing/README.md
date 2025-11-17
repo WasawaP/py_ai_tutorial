@@ -325,6 +325,6 @@ plt.show()
 
 - 💬 加入学习社群讨论
 - 🐛 提交[GitHub Issue](https://github.com/shychee/py_ai_tutorial/issues)
-- 📧 发送邮件至 tutorial@example.com
+- 📧 发送邮件至 shychee96@gmail.com
 
 **让我们一起打好AI学习的基础！** 💪

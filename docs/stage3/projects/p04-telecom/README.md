@@ -411,7 +411,7 @@ cat outputs/experiment_info.json
 - **项目Issues**: [GitHub Issues](https://github.com/shychee/py_ai_tutorial/issues)
 - **学习社群**: [Discord/微信群链接]
 - **故障排查**: 参见 `docs/cross-platform/troubleshooting.md`
-- **邮件支持**: tutorial@example.com
+- **邮件支持**: shychee96@gmail.com
 
 ---
 

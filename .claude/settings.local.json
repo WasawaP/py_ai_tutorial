@@ -32,7 +32,10 @@
       "Bash(do:*)",
       "Bash(ls:*)",
       "Bash(done:*)",
-      "Bash(git remote:*)"
+      "Bash(git remote:*)",
+      "Bash(git log:*)",
+      "Bash(git push:*)",
+      "Bash(git config:*)"
     ],
     "deny": [],
     "ask": []

@@ -326,7 +326,7 @@ mkdocs build
 ## 📧 联系方式
 
 - **GitHub Issues**: [提交问题](https://github.com/shychee/py_ai_tutorial/issues)
-- **邮件**: tutorial@example.com
+- **邮件**: shychee96@gmail.com
 - **文档**: [在线文档](https://shychee.github.io/py_ai_tutorial/)
 
 ---

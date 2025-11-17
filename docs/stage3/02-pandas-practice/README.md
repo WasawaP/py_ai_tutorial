@@ -603,6 +603,6 @@ print(df.head())
 
 - 💬 加入学习社群讨论
 - 🐛 提交[GitHub Issue](https://github.com/shychee/py_ai_tutorial/issues)
-- 📧 发送邮件至 tutorial@example.com
+- 📧 发送邮件至 shychee96@gmail.com
 
 **掌握数据清洗，你就掌握了数据科学的80%！** 💪

@@ -278,6 +278,6 @@ auc = roc_auc_score(y_true, y_pred_proba)
 
 - 💬 加入学习社群讨论
 - 🐛 提交[GitHub Issue](https://github.com/shychee/py_ai_tutorial/issues)
-- 📧 发送邮件至 tutorial@example.com
+- 📧 发送邮件至 shychee96@gmail.com
 
 **机器学习是实践的艺术 - 多做项目，多参加竞赛！** 💪

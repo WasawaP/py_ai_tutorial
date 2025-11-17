@@ -313,6 +313,6 @@ $$P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)}$$
 
 - 💬 加入学习社群讨论
 - 🐛 提交[GitHub Issue](https://github.com/shychee/py_ai_tutorial/issues)
-- 📧 发送邮件至 tutorial@example.com
+- 📧 发送邮件至 shychee96@gmail.com
 
 **数学是理解机器学习的钥匙，但不要被数学吓倒！** 💪
