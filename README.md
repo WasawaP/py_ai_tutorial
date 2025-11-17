@@ -1,10 +1,30 @@
 # Python AI 教程：从机器学习到大模型
 
-[![Python Version](https://img.shields.io/badge/python-3.9%2B-blue)](https://www.python.org/downloads/)
+<div align="center">
+
+[![Python Version](https://img.shields.io/badge/python-3.9%2B-blue?logo=python&logoColor=white)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
-[![Documentation](https://img.shields.io/badge/docs-MkDocs-blue)](https://shychee.github.io/py_ai_tutorial/)
+[![GitHub release](https://img.shields.io/github/v/release/shychee/py_ai_tutorial?include_prereleases)](https://github.com/shychee/py_ai_tutorial/releases)
+[![GitHub stars](https://img.shields.io/github/stars/shychee/py_ai_tutorial?style=social)](https://github.com/shychee/py_ai_tutorial/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/shychee/py_ai_tutorial?style=social)](https://github.com/shychee/py_ai_tutorial/network/members)
+
+[![Documentation](https://img.shields.io/badge/docs-MkDocs-blue?logo=markdown&logoColor=white)](https://shychee.github.io/py_ai_tutorial/)
+[![Jupyter](https://img.shields.io/badge/Jupyter-Notebooks-orange?logo=jupyter&logoColor=white)](notebooks/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-Ready-red?logo=pytorch&logoColor=white)](https://pytorch.org/)
+[![TensorFlow](https://img.shields.io/badge/TensorFlow-Ready-orange?logo=tensorflow&logoColor=white)](https://tensorflow.org/)
+[![scikit-learn](https://img.shields.io/badge/scikit--learn-Ready-blue?logo=scikitlearn&logoColor=white)](https://scikit-learn.org/)
+
+[![macOS](https://img.shields.io/badge/macOS-Intel%20%7C%20Apple%20Silicon-black?logo=apple&logoColor=white)](docs/cross-platform/setup-macos-intel.md)
+[![Linux](https://img.shields.io/badge/Linux-Ubuntu%20%7C%20CentOS-orange?logo=linux&logoColor=white)](docs/cross-platform/setup-linux.md)
+[![Windows](https://img.shields.io/badge/Windows-Native%20%7C%20WSL2-blue?logo=windows&logoColor=white)](docs/cross-platform/setup-windows-native.md)
+
+</div>
+
+<div align="center">
 
 > 为具备 3-5 年 Python 后端经验的工程师打造的 AI 学习路径，从传统机器学习到生成式 AI 的渐进式教程体系。
+
+</div>
 
 ---
 
@@ -19,11 +39,17 @@
 ### 核心特点
 
 ✅ **渐进式学习路径** - 阶段3→4→5，明确前置依赖，循序渐进
+
 ✅ **跨平台支持** - macOS (Intel/M系列)、Linux、Windows (原生/WSL2)、云端GPU
+
 ✅ **实战项目丰富** - 17个行业项目（医疗、电商、金融、CV、NLP、LLM等）
+
 ✅ **代码质量标准** - PEP 8、类型注解、文档字符串、单元测试
+
 ✅ **多框架对比** - PyTorch vs TensorFlow核心项目双实现
+
 ✅ **中文优先** - 文档、注释中文为主，技术术语中英对照
+
 ✅ **现代化工具链** - 使用uv包管理器 + pyproject.toml标准配置
 
 ---
